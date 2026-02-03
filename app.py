@@ -19,15 +19,12 @@ def projects():
     projects = repo.get_all_projects()
     return render_template("projects.html", projects=projects)
 
-@app.route('/projects/<id>', methods=["GET"])
-def project(id):
+@app.route('/projects/<int:project_id>', methods=["GET"])
+def project(project_id):
     connection = get_flask_database_connection(app)
     repo = ProjectImageRepository(connection)
-    project_images = repo.get_all_project_images(id)
+    project_images = repo.get_all_project_images(project_id)
     return render_template('project_images.html', project_images = project_images)
-
-
-
 
 @app.route("/sketchbook", methods=["GET"])
 def sketchbook():
