@@ -1,6 +1,5 @@
 from lib.project import Project
 from lib.database_connection import DatabaseConnection
-from lib.project_image import ProjectImage
 
 
 class ProjectRepository:
