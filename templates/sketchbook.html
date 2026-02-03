@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Sketchbook{% endblock %}
 {% block content %}
+<div class="sketches">
+{% for sketch in sketches%}
+<div class="sketch">
+    <img src="{{sketch.image_url}}"/>
+</div>
+{% endfor %}
+</div>
+
 {% endblock %}

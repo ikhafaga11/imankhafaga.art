@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request
 from lib.database_connection import get_flask_database_connection
 from lib.project_repository import ProjectRepository
 from lib.project_image_repository import ProjectImageRepository
+from lib.sketchbook_repository import SketchbookRepository
 import os
 
 app = Flask(__name__)
@@ -28,7 +29,10 @@ def project(project_id):
 
 @app.route("/sketchbook", methods=["GET"])
 def sketchbook():
-    return render_template("sketchbook.html")
+    connection = get_flask_database_connection(app)
+    repo  = SketchbookRepository(connection)
+    sketches = repo.get_all_sketches()
+    return render_template("sketchbook.html", sketches = sketches)
 
 
 @app.route("/links", methods=["GET"])
