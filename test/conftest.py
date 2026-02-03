@@ -4,6 +4,7 @@ from xprocess import ProcessStarter
 from lib.database_connection import DatabaseConnection
 from app import app
 
+
 # This is a Pytest fixture.
 # It creates an object that we can use in our tests.
 # We will use it to create a database connection.
@@ -13,13 +14,15 @@ def db_connection():
     conn.connect()
     return conn
 
+
 # This fixture starts the test server and makes it available to the tests.
 # You don't need to understand it in detail.
 @pytest.fixture
 def test_web_address(xprocess):
     python_executable = sys.executable
-    app_file = Path(__file__).resolve().parent.parent / 'app.py'
+    app_file = Path(__file__).resolve().parent.parent / "app.py"
     port = str(random.randint(4000, 4999))
+
     class Starter(ProcessStarter):
         env = {"PORT": port, "APP_ENV": "test", **os.environ}
         pattern = "Debugger PIN"
@@ -46,6 +49,6 @@ def test_web_address(xprocess):
 # We'll also create a fixture for the client we'll use to make test requests.
 @pytest.fixture
 def web_client():
-    app.config['TESTING'] = True # This gets us better errors
+    app.config["TESTING"] = True  # This gets us better errors
     with app.test_client() as client:
         yield client
