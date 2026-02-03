@@ -1,11 +1,12 @@
 from lib.project import Project
+from lib.database_connection import DatabaseConnection
 
 
 class ProjectRepository:
-    def __init__(self, db_connection):
+    def __init__(self, db_connection: DatabaseConnection):
         self._connection = db_connection
 
-    def add_project(self, project: Project) -> Project:
+    def post_project(self, project: Project) -> Project:
         if project.id is not None:
             raise ValueError("Project already has an id")
 
@@ -16,7 +17,53 @@ class ProjectRepository:
                 project.cover_image_url,
             ],
         )
-
         project.id = rows[0]["id"]
-
         return project
+
+    def get_project(self, id: int) -> Project:
+        rows = self._connection.execute("SELECT * FROM projects WHERE id = %s", [id])
+        row = rows[0]
+        return Project(row["title"], row["cover_image_url"], row["id"])
+
+    def get_all_projects(self) -> list[Project]:
+        rows: list[dict] = self._connection.execute("SELECT * FROM projects")
+        projects_list: list[Project] = []
+        for row in rows:
+            Project(row["title"], row["cover_image_url"], row["id"])
+        return projects_list
+
+    def delete_project(self, id: int) -> str:
+        rows = self._connection.execute(
+            "DELETE FROM projects WHERE id = %s RETURNING: id;",
+            [
+                id,
+            ],
+        )
+        deleted_row_id = rows[0]["id"]
+        return f"project {deleted_row_id} deleted"
+
+    def update_cover_image_url(self, id: int, url: str) -> Project:
+        rows = self._connection.execute(
+            "UPDATE project SET cover_image_url = %s WHERE id = %s RETURNING *",
+            [
+                url,
+                id,
+            ],
+        )
+        row = rows[0]
+        return Project(
+            title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
+        )
+
+    def update_title(self, id: int, title: str) -> Project:
+        rows = self._connection.execute(
+            "UPDATE project SET title = %s WHERE id = %s RETURNING *",
+            [
+                title,
+                id,
+            ],
+        )
+        row = rows[0]
+        return Project(
+            title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
+        )
