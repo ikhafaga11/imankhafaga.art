@@ -25,7 +25,7 @@ class ProjectRepository:
         rows: list[dict] = self._connection.execute(
             "SELECT * FROM projects WHERE id = %s RETURNING *;", [id]
         )
-        row = rows[0]
+        row: dict = rows[0]
         return Project(row["title"], row["cover_image_url"], row["id"])
 
     def get_all_projects(self) -> list[Project]:
@@ -38,7 +38,7 @@ class ProjectRepository:
         return projects_list
 
     def delete_project(self, id: int) -> None:
-        rows: list[dict] = self._connection.execute(
+        self._connection.execute(
             "DELETE FROM projects WHERE id = %s",
             [
                 id,
@@ -53,7 +53,7 @@ class ProjectRepository:
                 id,
             ],
         )
-        row = rows[0]
+        row: dict = rows[0]
         return Project(
             title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
         )
@@ -66,7 +66,7 @@ class ProjectRepository:
                 id,
             ],
         )
-        row = rows[0]
+        row: dict = rows[0]
         return Project(
             title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
         )
