@@ -32,18 +32,18 @@ class ProjectRepository:
         rows: list[dict] = self._connection.execute("SELECT * FROM projects")
         projects_list: list[Project] = []
         for row in rows:
-            projects_list.append(Project(row["title"], row["cover_image_url"], row["id"]))
+            projects_list.append(
+                Project(row["title"], row["cover_image_url"], row["id"])
+            )
         return projects_list
 
-    def delete_project(self, id: int) -> str:
+    def delete_project(self, id: int) -> None:
         rows: list[dict] = self._connection.execute(
-            "DELETE FROM projects WHERE id = %s RETURNING: id;",
+            "DELETE FROM projects WHERE id = %s",
             [
                 id,
             ],
         )
-        deleted_row_id = rows[0]["id"]
-        return f"project {deleted_row_id} deleted"
 
     def update_cover_image_url(self, id: int, url: str) -> Project:
         rows: list[dict] = self._connection.execute(
@@ -91,17 +91,34 @@ class ProjectRepository:
                 id,
             ],
         )
-        row:list = rows[0]
+        row: list = rows[0]
         return ProjectImage(
             caption=row["caption"],
             image_url=row["image_url"],
             id=row["id"],
             project_id=row["project_id"],
         )
+
     def get_all_project_images(self) -> list[Project]:
-        rows: list[dict] = self._connection.execute("SELECT * FROM project_images RETURNING *;")
+        rows: list[dict] = self._connection.execute(
+            "SELECT * FROM project_images RETURNING *;"
+        )
         project_images_list: list = []
         for row in rows:
-            project_images_list.append(ProjectImage(caption=row["id"], image_url=row["image_url"], id=row["id"], project_id=row["project_id"]))
+            project_images_list.append(
+                ProjectImage(
+                    caption=row["id"],
+                    image_url=row["image_url"],
+                    id=row["id"],
+                    project_id=row["project_id"],
+                )
+            )
         return project_images_list
 
+    def delete_project_image(self, id: int) -> None:
+        rows = self._connection.execute(
+            "DELETE FROM project_images WHERE id = %s",
+            [
+                id,
+            ],
+        )
