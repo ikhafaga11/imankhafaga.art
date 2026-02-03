@@ -19,7 +19,7 @@ class ProjectImageRepository:
 
         return project_image
 
-    def get_poject_image(self, id: int) -> ProjectImage:
+    def get_project_image(self, id: int) -> ProjectImage:
         rows: list[dict] = self._connection.execute(
             "SELECT * FROM project_images WHERE id = %s RETURNING *; ",
             [
@@ -34,9 +34,9 @@ class ProjectImageRepository:
             project_id=row["project_id"],
         )
 
-    def get_all_project_images(self) -> list[ProjectImage]:
+    def get_all_project_images(self, project_id: int) -> list[ProjectImage]:
         rows: list[dict] = self._connection.execute(
-            "SELECT * FROM project_images RETURNING *;"
+            "SELECT * FROM project_images WHERE project_id = %s RETURNING *;", [project_id,]
         )
         project_images_list: list = []
         for row in rows:
