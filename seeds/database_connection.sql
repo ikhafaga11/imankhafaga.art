@@ -41,7 +41,7 @@ INSERT INTO
 VALUES
     (
         'Girl Before A Mirror',
-        'https://res.cloudinary.com/dm7q2jmog/image/upload/v1770139844/bffcf5a8-52da-42be-881b-e5e57d0ba577.png',
+        'https://res.cloudinary.com/dm7q2jmog/image/upload/v1770139424/GirlBeforeAMirror_jsmgrx.jpg',
         1
     ),
     (
