@@ -1,5 +1,6 @@
 from lib.project import Project
 from lib.database_connection import DatabaseConnection
+from lib.project_image import ProjectImage
 
 
 class ProjectRepository:
@@ -67,3 +68,16 @@ class ProjectRepository:
         return Project(
             title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
         )
+
+    def post_image(self, project_image: ProjectImage) -> ProjectImage:
+        rows = self._connection.execute(
+            "INSERT INTO project_image (caption, image_url, project_id) VALUES( %s %s %s) RETURNING id;"
+            [
+                project_image.caption,
+                project_image.image_url,
+                project_image.project_id,
+            ]
+        )
+        project_image.id = rows[0]["id"]
+
+        return project_image
