@@ -1,5 +1,6 @@
-from lib.project_image import ProjectImage;
+from lib.project_image import ProjectImage
 from lib.database_connection import DatabaseConnection
+
 
 class ProjectImageRepository:
     def __init__(self, db_connection: DatabaseConnection):
@@ -56,12 +57,35 @@ class ProjectImageRepository:
                 id,
             ],
         )
+
     def update_image_url(self, id: int, new_image_url: str) -> ProjectImage:
-        rows = self._connection.execute("UPDATE project_images SET image_url = %s WHERE id = %s RETURNING *", [new_image_url,id,])
+        rows = self._connection.execute(
+            "UPDATE project_images SET image_url = %s WHERE id = %s RETURNING *",
+            [
+                new_image_url,
+                id,
+            ],
+        )
         row: dict = rows[0]
-        return ProjectImage(caption=row['caption'], image_url=row['image_url'], id=row["id"], project_id=row["project_id"])
-    
+        return ProjectImage(
+            caption=row["caption"],
+            image_url=row["image_url"],
+            id=row["id"],
+            project_id=row["project_id"],
+        )
+
     def update_caption(self, id: int, new_caption: str) -> ProjectImage:
-        rows: list[dict] = self._connection.execute("UPDATE project_images SET image_url = %s WHERE id = %s RETURNING *", [new_caption,id,])
+        rows: list[dict] = self._connection.execute(
+            "UPDATE project_images SET image_url = %s WHERE id = %s RETURNING *",
+            [
+                new_caption,
+                id,
+            ],
+        )
         row: dict = rows[0]
-        return ProjectImage(caption=row['caption'], image_url=row['image_url'], id=row["id"], project_id=row["project_id"])
+        return ProjectImage(
+            caption=row["caption"],
+            image_url=row["image_url"],
+            id=row["id"],
+            project_id=row["project_id"],
+        )
