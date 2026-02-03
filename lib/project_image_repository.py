@@ -43,7 +43,7 @@ class ProjectImageRepository:
         for row in rows:
             project_images_list.append(
                 ProjectImage(
-                    caption=row["id"],
+                    caption=row["caption"],
                     image_url=row["image_url"],
                     id=row["id"],
                     project_id=row["project_id"],
