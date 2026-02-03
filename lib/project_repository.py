@@ -23,7 +23,7 @@ class ProjectRepository:
 
     def get_project(self, id: int) -> Project:
         rows: list[dict] = self._connection.execute(
-            "SELECT * FROM projects WHERE id = %s RETURNING *;", [id]
+            "SELECT * FROM projects WHERE id = %s;", [id]
         )
         row: dict = rows[0]
         return Project(row["title"], row["cover_image_url"], row["id"])
