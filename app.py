@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
+from lib.database_connection import get_flask_database_connection
+from lib.project_repository import ProjectRepository
 import os
 
 app = Flask(__name__)
@@ -11,7 +13,10 @@ def home():
 
 @app.route("/projects", methods=["GET"])
 def projects():
-    return render_template("project.html")
+    connection = get_flask_database_connection(app)
+    repo = ProjectRepository(connection)
+    projects = repo.get_all_projects()
+    return render_template("project.html", projects=projects)
 
 
 @app.route("/sketchbook", methods=["GET"])
