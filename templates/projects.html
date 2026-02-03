@@ -3,8 +3,10 @@ content %}
 <div class="projects__container">
   {% for project in projects %}
   <div class="project">
+    <a href="/projects/{{ project.id }}">
     <h1>{{project.title}}</h1>
-    <img src="{{project.cover_image_url}}" />
+    <img src="{{ project.cover_image_url }}" />
+    </a>
   </div>
   {% endfor %}
 </div>
