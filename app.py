@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from lib.database_connection import get_flask_database_connection
 from lib.project_repository import ProjectRepository
-from lib.project_image_repository import ProjectImageRepository
+from lib.project_content_repository import ProjectContentRepository
 from lib.sketchbook_repository import SketchbookRepository
 import os
 
@@ -20,19 +20,24 @@ def projects():
     projects = repo.get_all_projects()
     return render_template("projects.html", projects=projects)
 
-@app.route('/projects/<int:project_id>', methods=["GET"])
-def project(project_id):
+
+@app.route("/projects/<int:project_id>", methods=["GET"])
+def project_detail(project_id):
     connection = get_flask_database_connection(app)
-    repo = ProjectImageRepository(connection)
-    project_images = repo.get_all_project_images(project_id)
-    return render_template('project_images.html', project_images = project_images)
+    project_repo = ProjectRepository(connection)
+    content_repo = ProjectContentRepository(connection)
+    project = project_repo.get_project(project_id)
+    contents = content_repo.get_project_contents(project.id)
+    project.contents = contents
+    return render_template("project_contents.html", project = project)
+
 
 @app.route("/sketchbook", methods=["GET"])
 def sketchbook():
     connection = get_flask_database_connection(app)
-    repo  = SketchbookRepository(connection)
+    repo = SketchbookRepository(connection)
     sketches = repo.get_all_sketches()
-    return render_template("sketchbook.html", sketches = sketches)
+    return render_template("sketchbook.html", sketches=sketches)
 
 
 @app.route("/links", methods=["GET"])
