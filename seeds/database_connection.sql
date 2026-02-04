@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS projects,
-project_images,
-sketchs;
+project_contents,
+sketches;
 
 CREATE TABLE
     projects (
@@ -10,7 +10,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    project_images (
+    project_contents (
         id SERIAL PRIMARY KEY,
         caption VARCHAR(255) NOT NULL,
         image_url VARCHAR(255) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    sketchs (
+    sketches (
         id SERIAL PRIMARY KEY,
         image_url VARCHAR(255) NOT NULL
     );
@@ -37,7 +37,7 @@ VALUES
     );
 
 INSERT INTO
-    project_images (caption, image_url, project_id)
+    project_contents (caption, image_url, project_id)
 VALUES
     (
         'Girl Before A Mirror',
@@ -51,7 +51,7 @@ VALUES
     );
 
 INSERT INTO
-    sketchs (image_url)
+    sketches (image_url)
 VALUES
     (
         'https://res.cloudinary.com/dm7q2jmog/image/upload/v1770140043/c8b24259-fdee-45ca-ad87-a68bc19893bb.png'
