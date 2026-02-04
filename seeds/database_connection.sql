@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS projects,
-project_contents,
-sketches;
+DROP TABLE IF EXISTS projects CASCADE;
+DROP TABLE IF EXISTS project_contents CASCADE;
+DROP TABLE IF EXISTS sketches CASCADE;
 
 CREATE TABLE
     projects (
