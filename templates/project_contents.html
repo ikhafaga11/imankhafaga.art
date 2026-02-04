@@ -1,0 +1,11 @@
+{%extends 'base.html'%} {% block title %}{% endblock %} {% block content %}
+<div class="project-contents__container">
+  {% for content in project.contents %}
+  <div class="project-content">
+    <img src="{{content.image_url}}" />
+    <p>{{content.caption}}</p>
+  </div>
+  {% endfor %}
+  <p>{{contents}}</p>
+</div>
+{% endblock %}
