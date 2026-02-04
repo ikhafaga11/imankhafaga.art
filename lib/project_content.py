@@ -1,6 +1,3 @@
-from lib.project import Project
-
-
 class ProjectContent:
     def __init__(
         self, project_id: int, caption: str, image_url: str, id: int = None
