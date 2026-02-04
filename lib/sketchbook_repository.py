@@ -8,7 +8,7 @@ class SketchbookRepository:
 
     def add_sketch(self, image_url: str) -> Sketchbook:
         rows: list[dict] = self._connection.execute(
-            "INSERT INTO sketchs (image_url) VALUES ( %s ) RETURNING *",
+            "INSERT INTO sketches (image_url) VALUES ( %s ) RETURNING *",
             [
                 image_url,
             ],
@@ -18,14 +18,14 @@ class SketchbookRepository:
 
     def delete_sketch(self, id: int) -> None:
         self._connection.execute(
-            "DELETE FROM sketchs WHERE id = %s",
+            "DELETE FROM sketches WHERE id = %s",
             [
                 id,
             ],
         )
 
     def get_all_sketches(self) -> list[Sketchbook]:
-        rows: list[dict] = self._connection.execute("SELECT * FROM sketchs")
+        rows: list[dict] = self._connection.execute("SELECT * FROM sketches")
         sketches_list: list[Sketchbook] = []
         for row in rows:
             sketches_list.append(Sketchbook(row["image_url"]))
