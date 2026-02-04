@@ -25,7 +25,7 @@ class SketchbookRepository:
         )
 
     def get_all_sketches(self) -> list[Sketchbook]:
-        rows: list[dict]  = self._connection.execute("SELECT * FROM sketchs")
+        rows: list[dict] = self._connection.execute("SELECT * FROM sketchs")
         sketches_list: list[Sketchbook] = []
         for row in rows:
             sketches_list.append(Sketchbook(row["image_url"]))

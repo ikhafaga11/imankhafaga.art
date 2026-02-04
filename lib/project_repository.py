@@ -44,25 +44,13 @@ class ProjectRepository:
             ],
         )
 
-    def update_cover_image_url(self, id: int, url: str) -> Project:
+    def update_project(self, new_project: Project) -> Project:
         rows: list[dict] = self._connection.execute(
-            "UPDATE project SET cover_image_url = %s WHERE id = %s RETURNING *",
+            "UPDATE projects SET title = %s, cover_image_url = %s WHERE id = %s RETURNING *;",
             [
-                url,
-                id,
-            ],
-        )
-        row: dict = rows[0]
-        return Project(
-            title=row["title"], cover_image_url=row["cover_image_url"], id=row["id"]
-        )
-
-    def update_title(self, id: int, title: str) -> Project:
-        rows: list[dict] = self._connection.execute(
-            "UPDATE project SET title = %s WHERE id = %s RETURNING *",
-            [
-                title,
-                id,
+                new_project.title,
+                new_project.cover_image_url,
+                new_project.id,
             ],
         )
         row: dict = rows[0]
