@@ -44,17 +44,19 @@ class ProjectContentRepository:
             project_id=row["project_id"],
         )
 
-    def get_content(self, id: int) -> ProjectContent:
+    def get_project_contents(self, project_id: int) -> list[ProjectContent]:
         rows: list[dict] = self._connection.execute(
-            "SELECT * FROM project_contents WHERE id = %s",
+            "SELECT * FROM project_contents WHERE project_id = %s",
             [
-                id,
+                project_id,
             ],
         )
-        row: dict = rows[0]
-        return ProjectContent(
-            project_id=row["project_id"],
-            caption=row["caption"],
-            image_url=row["image_url"],
-            id=row["id"],
-        )
+        project_contents: list[ProjectContent] = []
+        for row in rows:
+            project_contents.append(ProjectContent(
+                project_id=row["project_id"],
+                caption=row["caption"],
+                image_url=row["image_url"],
+                id=row["id"],
+            ))
+        return project_contents
