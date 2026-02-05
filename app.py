@@ -4,6 +4,8 @@ from lib.project_repository import ProjectRepository
 from lib.project_content_repository import ProjectContentRepository
 from lib.sketchbook_repository import SketchbookRepository
 from lib.auth_repository import AuthRepository
+from lib.project_content import ProjectContent
+from lib.project import Project
 import os
 from dotenv import load_dotenv
 
@@ -17,15 +19,25 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/projects", methods=["GET"])
+@app.route("/projects", methods=["GET", "POST"])
 def projects():
     connection = get_flask_database_connection(app)
     repo = ProjectRepository(connection)
+    if(request.method == "POST"):
+        # get form values
+        title = request.form["title"]
+        cover_image_url = request.form["cover_image_url"]
+        # instantiate model
+        model = Project(title=title, cover_image_url=cover_image_url)
+        # insert new project
+        repo.post_project(model)
+        # redirect to project to prevent for resubmision
+        return redirect(url_for("projects"))
     projects = repo.get_all_projects()
     return render_template("projects.html", projects=projects) 
 
 
-@app.route("/projects/<int:project_id>", methods=["GET"])
+@app.route("/projects/<int:project_id>", methods=["GET", "POST"])
 def project_detail(project_id):
     connection = get_flask_database_connection(app)
     project_repo = ProjectRepository(connection)
@@ -42,7 +54,7 @@ def sketchbook():
     repo = SketchbookRepository(connection)
     if (request.method == "POST"):
         image_url = request.form['image_url']
-        sketches = repo.add_sketch(image_url=image_url) 
+        repo.add_sketch(image_url=image_url) 
         return redirect(url_for("sketchbook"))
 
     sketches = repo.get_all_sketches()
