@@ -1,20 +1,49 @@
-{%extends 'base.html'%} {% block title %}{{project.title}}{% endblock %} {% block content %}
-  {% if session['user_id']%}
-  <form method="post" autocomplete="off">
-    <label for="caption">Caption</label>
-    <input name="caption" id="caption" autocomplete="off" />
-    <label for="image url">Image</label>
-    <input name="image_url" id="image_url" autocomplete="off"/>
-    <input type="submit" value="upload"/>
-  </form>
-  {% endif %}
+{%extends 'base.html'%} {% block title %}{{project.title}}{% endblock %} {%
+block content %} {% if session['user_id']%}
+<form method="post" autocomplete="off">
+  <label for="caption">Caption</label>
+  <input name="caption" id="caption" autocomplete="off" />
+  <label for="image url">Image</label>
+  <input name="image_url" id="image_url" autocomplete="off" />
+  <input type="submit" value="upload" />
+</form>
+{% endif %}
+
 <div class="project-contents__container">
   {% for content in project.contents %}
   <div class="project-content">
     <img src="{{content.image_url}}" />
     <p>{{content.caption}}</p>
+
+    {% if session['user_id'] %}
+    <div class="controls">
+      <div>
+        {% if edit %}
+        <a href="/projects/{{ project.id }}">Exit Edit</a>
+        {% else %}
+        <a href="/projects/{{ project.id }}?edit=true&content_id={{content.id}}">Edit</a>
+        {% endif %}
+      </div>
+      <div>
+        {% if session["user_id"] %}
+        <form method="post" action="/projects/{{ project.id }}/delete/content_id/{{ content.id }}">
+        <button type="submit">Delete</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
   </div>
+
+  {% if edit and session['user_id'] %}
+  <form method="POST" autocomplete="off">
+    <label for="caption">Caption</label>
+      <input name="caption" id="caption" autocomplete="off" value="{{content.caption}}"/>
+      <label for="image url">Image</label>
+      <input name="image_url" id="image_url" autocomplete="off" value="{{content.image_url}}"/>
+      <input type="submit" value="update"/>
+  </form>
+  {% endif %}
   {% endfor %}
-  <p>{{contents}}</p>
 </div>
 {% endblock %}

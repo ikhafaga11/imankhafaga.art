@@ -37,12 +37,24 @@ def projects():
     return render_template("projects.html", projects=projects) 
 
 
-@app.route("/projects/<int:project_id>", methods=["GET", "POST"])
+@app.route("/projects/<int:project_id>", methods=["GET", "POST", "PUT"])
 def project_detail(project_id):
     connection = get_flask_database_connection(app)
     project_repo = ProjectRepository(connection)
     content_repo = ProjectContentRepository(connection)
     project = project_repo.get_project(project_id)
+
+    edit = request.args.get('edit') == "true"
+    content_id = request.args.get('content_id')
+
+    if(request.method == "POST" and edit):
+        caption = request.form["caption"]
+        image_url = request.form["image_url"]
+        model = ProjectContent(project_id=project.id, caption=caption, image_url=image_url, id=content_id)
+        content_repo.update_content(model)
+        return redirect(url_for("project_detail", project_id = project.id))
+
+
     if(request.method == "POST"):
         # get form values
         caption = request.form["caption"]
@@ -58,7 +70,17 @@ def project_detail(project_id):
     
     contents = content_repo.get_project_contents(project.id)
     project.contents = contents
-    return render_template("project_contents.html", project = project)
+    return render_template("project_contents.html", project = project, edit = edit)
+
+
+@app.route("/projects/<int:project_id>/delete/content_id/<int:content_id>", methods = ["POST"])
+def del_project_detail(project_id, content_id):
+    connection = get_flask_database_connection(app)
+    repo = ProjectContentRepository(connection)
+    repo.delete_content(content_id)
+    return redirect(url_for("project_detail", project_id = project_id ))
+
+
 
 
 @app.route("/sketchbook", methods=["GET", "POST"])
