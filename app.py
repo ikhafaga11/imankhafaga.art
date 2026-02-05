@@ -36,10 +36,15 @@ def project_detail(project_id):
     return render_template("project_contents.html", project = project)
 
 
-@app.route("/sketchbook", methods=["GET"])
+@app.route("/sketchbook", methods=["GET", "POST"])
 def sketchbook():
     connection = get_flask_database_connection(app)
     repo = SketchbookRepository(connection)
+    if (request.method == "POST"):
+        image_url = request.form['image_url']
+        sketches = repo.add_sketch(image_url=image_url) 
+        return redirect(url_for("sketchbook"))
+
     sketches = repo.get_all_sketches()
     return render_template("sketchbook.html", sketches=sketches)
 
