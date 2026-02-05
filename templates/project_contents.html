@@ -2,9 +2,9 @@
   {% if session['user_id']%}
   <form method="post">
     <label for="caption">Caption</label>
-    <input name="caption" id="caption"/>
+    <input name="caption" id="caption" autocomplete="off" />
     <label for="image url">Image</label>
-    <input name="image_url" id="image_url"/>
+    <input name="image_url" id="image_url" autocomplete="off"/>
     <input type="submit" value="upload"/>
   </form>
   {% endif %}
