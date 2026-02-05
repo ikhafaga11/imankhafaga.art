@@ -1,6 +1,6 @@
-{%extends 'base.html'%} {% block title %}{% endblock %} {% block content %}
+{%extends 'base.html'%} {% block title %}{{project.title}}{% endblock %} {% block content %}
   {% if session['user_id']%}
-  <form method="post">
+  <form method="post" autocomplete="off">
     <label for="caption">Caption</label>
     <input name="caption" id="caption" autocomplete="off" />
     <label for="image url">Image</label>
