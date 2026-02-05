@@ -17,6 +17,11 @@
         <li><a href="{{url_for('sketchbook')}}">Sketchbook</a></li>
         <li><a href="{{url_for('links')}}">Links</a></li>
         <li><a href="{{url_for('contact')}}">Contact</a></li>
+        {% if not session %}
+        <li><a href="{{url_for('login')}}">Admin</a></li>
+        {% else %}
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+        {% endif %}
       </ul>
     </nav>
     <main>{% block content %}{% endblock %}</main>
