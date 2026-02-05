@@ -1,11 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, session, request
 from lib.database_connection import get_flask_database_connection
 from lib.project_repository import ProjectRepository
 from lib.project_content_repository import ProjectContentRepository
 from lib.sketchbook_repository import SketchbookRepository
+from lib.auth_repository import AuthRepository
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 
 @app.route("/", methods=["GET"])
@@ -18,7 +22,7 @@ def projects():
     connection = get_flask_database_connection(app)
     repo = ProjectRepository(connection)
     projects = repo.get_all_projects()
-    return render_template("projects.html", projects=projects)
+    return render_template("projects.html", projects=projects) 
 
 
 @app.route("/projects/<int:project_id>", methods=["GET"])
@@ -49,6 +53,23 @@ def links():
 def contact():
     return render_template("contact.html")
 
+@app.route("/auth/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        connection = get_flask_database_connection(app)
+        repo = AuthRepository(connection)
+        user = repo.get_user(username, password)
+        session.clear()
+        session['user_id'] = user.id
+        return redirect(url_for('home'))
+    return render_template('login.html')
+
+@app.route('/auth/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True, port=int(os.environ.get("PORT", 5000)))
