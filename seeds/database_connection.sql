@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS projects CASCADE;
 DROP TABLE IF EXISTS project_contents CASCADE;
 DROP TABLE IF EXISTS sketches CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE
     projects (
@@ -22,6 +23,13 @@ CREATE TABLE
     sketches (
         id SERIAL PRIMARY KEY,
         image_url VARCHAR(255) NOT NULL
+    );
+
+CREATE TABLE
+    users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255),
+        password VARCHAR(255)
     );
 
 INSERT INTO
@@ -56,3 +64,11 @@ VALUES
     (
         'https://res.cloudinary.com/dm7q2jmog/image/upload/v1770140043/c8b24259-fdee-45ca-ad87-a68bc19893bb.png'
     );
+
+INSERT INTO 
+users (username, password)
+VALUES 
+(
+    'ikhafaga1',
+    'Password123!'
+)
