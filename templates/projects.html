@@ -1,5 +1,16 @@
 {% extends 'base.html' %} {% block title %}Projects{% endblock %} {% block
 content %}
+
+{% if session["user_id"] %}
+<form method="post">
+  <label for="title">Title</label>
+  <input name="title" id="title" required/>
+  <label for="cover image">Cover Image</label>
+  <input name="cover_image" id="cover_image" required/>
+  <input type="submit" value="upload">
+</form>
+{% endif %}
+
 <div class="projects__container">
   {% for project in projects %}
   <div class="project">
