@@ -1,5 +1,14 @@
 {%extends 'base.html'%} {% block title %}{% endblock %} {% block content %}
 <div class="project-contents__container">
+  {% if session['user_id']%}
+  <form method="post">
+    <label for="caption">Caption</label>
+    <input name="caption" id="caption"/>
+    <label for="image url">Image</label>
+    <input name="image_url" id="image_url"/>
+    <input type="submit" value="upload"/>
+  </form>
+  {% endif %}
   {% for content in project.contents %}
   <div class="project-content">
     <img src="{{content.image_url}}" />
