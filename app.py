@@ -43,6 +43,19 @@ def project_detail(project_id):
     project_repo = ProjectRepository(connection)
     content_repo = ProjectContentRepository(connection)
     project = project_repo.get_project(project_id)
+    if(request.method == "POST"):
+        # get form values
+        caption = request.form["caption"]
+        image_url = request.form["image_url"]
+        # instantial content model
+        model = ProjectContent(project_id=project.id, caption=caption, image_url=image_url)
+        # insert content
+        new_content = content_repo.post_content(model)
+        # add new content to project content list
+        project.add_content(new_content)
+        # redirect to project detailt to prevent form resubmission
+        return redirect(url_for("project_detail", project_id = project.id))
+    
     contents = content_repo.get_project_contents(project.id)
     project.contents = contents
     return render_template("project_contents.html", project = project)
