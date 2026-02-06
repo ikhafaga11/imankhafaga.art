@@ -53,10 +53,12 @@ class ProjectContentRepository:
         )
         project_contents: list[ProjectContent] = []
         for row in rows:
-            project_contents.append(ProjectContent(
-                project_id=row["project_id"],
-                caption=row["caption"],
-                image_url=row["image_url"],
-                id=row["id"],
-            ))
+            project_contents.append(
+                ProjectContent(
+                    project_id=row["project_id"],
+                    caption=row["caption"],
+                    image_url=row["image_url"],
+                    id=row["id"],
+                )
+            )
         return project_contents

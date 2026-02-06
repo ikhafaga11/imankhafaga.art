@@ -10,8 +10,12 @@ class AuthRepository:
         rows: list[dict] = self._connection.execute(
             "SELECT * FROM users WHERE username = %s", [username]
         )
-        if(rows == [] or password != rows[0]["password"] or username != rows[0]["username"]):
+        if (
+            rows == []
+            or password != rows[0]["password"]
+            or username != rows[0]["username"]
+        ):
             raise Exception("User does not exist")
-        
+
         row: dict = rows[0]
         return Auth(id=row["id"], username=row["username"], password=row["password"])

@@ -28,7 +28,9 @@ class ProjectRepository:
         return Project(row["title"], row["cover_image_url"], row["id"])
 
     def get_all_projects(self) -> list[Project]:
-        rows: list[dict] = self._connection.execute("SELECT * FROM projects ORDER BY created_at DESC")
+        rows: list[dict] = self._connection.execute(
+            "SELECT * FROM projects ORDER BY created_at DESC"
+        )
         projects_list: list[Project] = []
         for row in rows:
             projects_list.append(
