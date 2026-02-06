@@ -1,13 +1,11 @@
 {% extends 'base.html' %} {% block title %}Projects{% endblock %} {% block
-content %}
-
-{% if session["user_id"] %}
+content %} {% if session["user_id"] %}
 <form method="post" autocomplete="off">
   <label for="title">Title</label>
   <input name="title" id="title" autocomplete="off" />
   <label for="cover image">Cover Image</label>
   <input name="cover_image_url" id="cover_image_url" autocomplete="off" />
-  <input type="submit" value="upload">
+  <input type="submit" value="upload" />
 </form>
 {% endif %}
 
@@ -15,9 +13,35 @@ content %}
   {% for project in projects %}
   <div class="project">
     <a href="/projects/{{ project.id }}">
-    <h1>{{project.title}}</h1>
-    <img src="{{ project.cover_image_url }}" />
+      <h1>{{project.title}}</h1>
+      <img src="{{ project.cover_image_url }}" />
     </a>
+    {% if session["user_id"]%}
+    <div class="controls">
+      <div>
+        {% if editing_id == project.id %}
+        <a href="{{ url_for('projects') }}">Exit Edit</a>
+        {% else %}
+        <a href="{{ url_for('projects', edit = project.id) }}">Edit</a>
+        {% endif %}
+      </div>
+      <div>
+        <form method="post" action="/projects/{{project.id}}/delete">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if editing_id == project.id %}
+    <form method="post" autocomplete="off">
+      <label for="title">Title</label>
+      <input name="title" id="title" value="{{project.title}}" autocomplete="off"/>
+      <label for="cover image url">Cover Image</label>
+      <input name="cover_image_url" id="cover_image_url" value="{{project.cover_image_url}}" autocomplete="off"/>
+      <input type="submit" value="Update"/>
+    </form>
+    {% endif %}
   </div>
   {% endfor %}
 </div>

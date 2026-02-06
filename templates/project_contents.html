@@ -18,10 +18,10 @@ block content %} {% if session['user_id']%}
     {% if session['user_id'] %}
     <div class="controls">
       <div>
-        {% if edit %}
+        {% if editing_id == content.id %}
         <a href="/projects/{{ project.id }}">Exit Edit</a>
         {% else %}
-        <a href="/projects/{{ project.id }}?edit=true&content_id={{content.id}}">Edit</a>
+        <a href="/projects/{{ project.id }}?edit={{content.id}}">Edit</a>
         {% endif %}
       </div>
       <div>
@@ -35,7 +35,7 @@ block content %} {% if session['user_id']%}
     {% endif %}
   </div>
 
-  {% if edit and session['user_id'] %}
+  {% if editing_id == content.id and session['user_id'] %}
   <form method="POST" autocomplete="off">
     <label for="caption">Caption</label>
       <input name="caption" id="caption" autocomplete="off" value="{{content.caption}}"/>
