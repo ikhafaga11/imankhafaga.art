@@ -28,5 +28,5 @@ class SketchbookRepository:
         rows: list[dict] = self._connection.execute("SELECT * FROM sketches")
         sketches_list: list[Sketchbook] = []
         for row in rows:
-            sketches_list.append(Sketchbook(row["image_url"]))
+            sketches_list.append(Sketchbook(row["image_url"],id=row["id"]))
         return sketches_list

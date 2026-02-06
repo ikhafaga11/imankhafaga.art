@@ -97,9 +97,6 @@ def delete_project(project_id):
     return redirect(url_for("projects"))
 
 
-
-
-
 @app.route("/sketchbook", methods=["GET", "POST"])
 def sketchbook():
     connection = get_flask_database_connection(app)
@@ -111,6 +108,13 @@ def sketchbook():
 
     sketches = repo.get_all_sketches()
     return render_template("sketchbook.html", sketches=sketches)
+
+@app.route('/sketchbook/<int:sketch_id>/delete', methods = ["POST"])
+def delete_sketch(sketch_id):
+    connection = get_flask_database_connection(app)
+    repo = SketchbookRepository(connection)
+    repo.delete_sketch(id=sketch_id)
+    return redirect(url_for('sketchbook'))
 
 
 @app.route("/links", methods=["GET"])

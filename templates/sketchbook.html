@@ -12,6 +12,11 @@
 {% for sketch in sketches%}
 <div class="sketch">
     <img src="{{sketch.image_url}}"/>
+    <div>
+        <form method="post" action="/sketchbook/{{ sketch.id }}/delete">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
 </div>
 {% endfor %}
 </div>
