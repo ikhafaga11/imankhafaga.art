@@ -10,6 +10,7 @@ content %} {% if session["user_id"] %}
 {% endif %}
 
 <div class="projects__container">
+
   {% for project in projects %}
   <div class="project">
     <a href="/projects/{{ project.id }}">

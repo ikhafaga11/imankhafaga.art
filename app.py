@@ -55,7 +55,7 @@ def projects():
         # redirect to project to prevent for resubmision
         return redirect(url_for("projects"))
     projects = repo.get_all_projects()
-    return render_template("projects.html", projects=projects, editing_id=editing_id)
+    return render_template("projects.html", projects=projects, editing_id=editing_id, active_page="projects")
 
 
 @app.route("/projects/<int:project_id>", methods=["GET", "POST"])
@@ -94,7 +94,7 @@ def project_detail(project_id):
     contents = content_repo.get_project_contents(project.id)
     project.contents = contents
     return render_template(
-        "project_contents.html", project=project, editing_id=editing_id
+        "project_contents.html", project=project, editing_id=editing_id, active_page="content"
     )
 
 
@@ -126,7 +126,7 @@ def sketchbook():
         return redirect(url_for("sketchbook"))
 
     sketches = repo.get_all_sketches()
-    return render_template("sketchbook.html", sketches=sketches)
+    return render_template("sketchbook.html", sketches=sketches, active_page="sketchbook")
 
 
 @app.route("/sketchbook/<int:sketch_id>/delete", methods=["POST"])
@@ -139,7 +139,7 @@ def delete_sketch(sketch_id):
 
 @app.route("/links", methods=["GET"])
 def links():
-    return render_template("links.html")
+    return render_template("links.html", active_page="links")
 
 
 @app.route("/contact/success", methods=["GET"])
@@ -174,7 +174,7 @@ def contact():
         mail.send(msg)
         return redirect(url_for("submitted_form"))
 
-    return render_template("contact.html")
+    return render_template("contact.html", active_page="contact")
 
 
 @app.route("/auth/login", methods=["GET", "POST"])
