@@ -3,6 +3,7 @@
   --text-color-white: white;
   --background-color-black: black;
   --background-color-white: white;
+  --background-color-yellow: #FFC107
 }
 html,
 body {
@@ -19,8 +20,7 @@ main {
 
 nav {
   display: flex;
-  padding: 0.5em;
-  border-bottom: solid black 0.15rem;
+  padding: 1rem;
 }
 
 nav h1 {
@@ -47,26 +47,45 @@ nav h1 a:hover{
 
 nav ul {
   display: flex;
-  justify-content: end;
-  align-items: center;
   flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
-  gap: 0.5rem;
   padding: 0.5rem 1rem;
   margin: 0;
 }
+
+.nav-center{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+}
+.nav-right{
+    display: flex;
+    border-radius: 0.75rem;
+}
+
 
 nav ul li {
   flex: 1;
   list-style: none;
   align-content: center;
   text-align: end;
-  padding: 0.25rem;
+  padding: 0.5rem;
 }
 
 nav ul li a {
   text-decoration: none;
   color: var(--text-color-black);
+  font-size: 1.5rem;
+  display: inline-block;    
+  font-weight:lighter;
+}
+
+
+nav ul li a:hover {
+    font-weight: bold;
+    transform: translateY(-4px);
 }
 
 .video-wrapper {
