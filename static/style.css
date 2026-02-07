@@ -100,12 +100,12 @@ nav ul li a {
   font-size: var(--font-size-h2);
 }
 
-nav ul li a:hover {
+.main-nav ul li a:hover {
   text-decoration: underline;
   
 }
 
-nav ul li a.active{
+.main-nav ul li a.active{
   text-decoration: underline;
   
 }
@@ -228,4 +228,22 @@ color: var(--text-color-black);
   .mobile-nav{
     display: none;
   }
+}
+
+.sketches{
+  column-width: 280px;
+  column-gap: 1rem;
+  padding: 1rem
+}
+
+
+.sketch {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+
+.sketch img {
+  width: 100%;
+  display: block;
 }
