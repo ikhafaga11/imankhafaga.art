@@ -10,8 +10,8 @@
     />
   </head>
   <body>
-    <nav>
-      <h1><a href="{{url_for('home')}}">Iman Khafaga</a></h1>
+    <nav class="main_nav">
+      <h1><a href="{{url_for('home')}}">Im | An | Artist</a></h1>
       <ul>
         <li><a href="{{url_for('projects')}}">Projects</a></li>
         <li><a href="{{url_for('sketchbook')}}">Sketchbook</a></li>
@@ -24,6 +24,8 @@
         {% endif %}
       </ul>
     </nav>
+
     <main>{% block content %}{% endblock %}</main>
+
   </body>
 </html>
