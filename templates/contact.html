@@ -1,15 +1,30 @@
-{% extends 'base.html' %}
-{% block title %}Contact{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block title %}Contact{% endblock %} {% block
+content %}
 <div class="contact-form">
-<form method="post">
+  <h1 class="contact-title">
+  <span class="text">Say hello</span>
+  <span class="emoji">👋</span>
+</h1>
+  <form method="post">
     <label for="Name">Name:</label>
-    <input name="name" id="name" placeholder="Your Name" required/>
+    <input name="name" id="name" placeholder="Your Name" required />
     <label for="Email">Email:</label>
-    <input type="email" name="email" id="email" placeholder="Your Email" required/>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="Your Email"
+      required
+    />
     <label for="message">Message:</label>
-    <textarea name="message" id="message" placeholder="Your Message" required></textarea>
-    <input type="submit"/>
-</form>
+    <textarea
+      name="message"
+      id="message"
+      placeholder="Your Message"
+      required
+    ></textarea>
+    <div class="divider-top"></div>
+    <button class="submit" type="submit">Submit</button>
+  </form>
 </div>
 {% endblock %}``

@@ -10,10 +10,13 @@ block content %} {% if session['user_id']%}
 {% endif %}
 
 <div class="project-contents__container">
+  <h1 class="project-contents-title">{{project.title}}</h1>
   {% for content in project.contents %}
   <div class="project-content">
     <img src="{{content.image_url}}" />
+    <div class="divider-top"></div>
     <p>{{content.caption}}</p>
+    <div class="divider-bottom"></div>
 
     {% if session['user_id'] %}
     <div class="controls">
