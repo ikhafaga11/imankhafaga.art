@@ -1,9 +1,16 @@
 {% extends 'base.html' %}{% block title %}Login{% endblock %} {% block content %}
+<div class="auth-form">
+    <h1 class="auth-form-title">
+        <span class="text">Admin Log In</span>
+         <span class="emoji">🔐</span>
+    </h1>
 <form method="post">
     <label for="username">Username</label>
-    <input name="username" id="username" autocomplete="off" />
+    <input name="username" id="username" placeholder="Your Username" autocomplete="off" />
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" autocomplete="off" required/>
-    <input type="submit" value="Log in">
+    <input type="password" name="password" id="password" placeholder="Your Password" autocomplete="off" required/>
+    <div class="divider-top"></div>
+    <button type="submit">Log in</button>
 </form>
+</div>
 {% endblock %}
