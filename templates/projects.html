@@ -16,6 +16,7 @@ content %} {% if session["user_id"] %}
     <a href="/projects/{{ project.id }}">
       <h1>{{project.title}}</h1>
       <img src="{{ project.cover_image_url }}" />
+      <div class="overlay"></div>
     </a>
     {% if session["user_id"]%}
     <div class="controls">
