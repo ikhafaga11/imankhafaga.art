@@ -179,6 +179,9 @@ def contact():
 
 @app.route("/auth/login", methods=["GET", "POST"])
 def login():
+    if (session.get("user_id")): 
+        return redirect(url_for('home'))
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
