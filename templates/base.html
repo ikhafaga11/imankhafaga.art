@@ -14,7 +14,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="{% if show_modal %}modal-open{% endif %}">
     <nav class="mobile-nav">
       <h2><a href="{{url_for('home')}}">Iman Khafaga</a></h2>
       <ul>

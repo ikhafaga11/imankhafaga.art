@@ -4,6 +4,7 @@
   --background-color-black: black;
   --background-color-white: white;
   --background-color-yellow: #ffc107;
+  --background-color-black-opacity: rgba(0, 0, 0, 0.756);
   --font-size-h1: 2.5rem;
   --font-size-h2: 1.5rem;
   --font-size-h3: 1rem;
@@ -27,7 +28,9 @@ body {
   font-weight: lighter;
   font-style: normal;
 }
-
+body.modal-open {
+  overflow: hidden;
+}
 h1 {
   font-size: var(--font-size-h1);
   font-weight: lighter;
@@ -172,7 +175,7 @@ nav ul li a {
   place-items: center;
   margin: 0;
   color: white;
-  z-index: 2;
+  z-index: 1;
 }
 
 .projects__container img {
@@ -319,19 +322,20 @@ nav ul li a {
 }
 
 .divider-bottom {
-  max-width: 500px;
-  min-width: 300px;
+  margin: auto;
+  width: 80%;
   border-top: 1px solid black;
   height: 1px;
   padding: 0.5rem;
 }
 
 .divider-top {
-  max-width: 500px;
-  min-width: 300px;
+  margin: auto;
+  width: 80%;
   border-bottom: 1px solid black;
   height: 1px;
   padding: 0.5rem;
+  
 }
 
 .project-contents-title {
@@ -354,17 +358,20 @@ nav ul li a {
 }
 
 .contact-title,
-.auth-form-title {
+.auth-form-title,
+.projects-form-title {
   text-align: center;
   margin: 1rem;
 }
 .contact-title .text,
-.auth-form .text {
+.auth-form .text,
+.projects-form .text {
   display: inline-block;
 }
 
 .contact-title .emoji,
-.auth-form-title .emoji {
+.auth-form-title .emoji,
+.projects-form-title .emoji {
   margin-left: 0.25rem;
 }
 
@@ -374,18 +381,18 @@ nav ul li a {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 100%;
   margin: auto;
 }
 
 .contact-form form label,
-.auth-form form label {
+.auth-form form label,
+.projects-form form label {
   font-size: var(--font-size-h3);
-  width: 100%;
 }
 
 .contact-form form button,
-.auth-form form button {
+.auth-form form button,
+.projects-form form button {
   border-radius: 0.75rem;
   color: var(--text-color-black);
   background-color: var(--background-color-white);
@@ -395,19 +402,21 @@ nav ul li a {
 }
 
 .contact-form form button:hover,
-.auth-form form button:hover {
+.auth-form form button:hover,
+.projects-form form button:hover {
   background-color: var(--background-color-black);
   color: var(--text-color-white);
 }
 
 .contact-form input,
-.auth-form input {
-  height: 25px;
+.auth-form input,
+.projects-form input {
+  height: 50px;
 }
 .contact-form textarea,
 .contact-form input,
-.auth-form input {
-  width: 100%;
+.auth-form input,
+.projects-form input {
   border-radius: 0.75rem;
   border: solid 0.1rem var(--text-color-black);
   padding: 1rem;
@@ -417,7 +426,82 @@ nav ul li a {
 
 .contact-form textarea::placeholder,
 .contact-form input::placeholder,
-.auth-form input::placeholder {
+.auth-form input::placeholder,
+.projects-form input::placeholder {
   padding: 0 0.5rem;
   align-content: center;
+}
+
+/* PROJECTS FORM  */
+
+
+.projects-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* MODAL */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background-color: var(--background-color-black-opacity);
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-card{
+  width: min(90%, 420px);
+  background-color: var(--background-color-white);
+    padding: 2rem;
+  border-radius: 1rem;
+}
+
+.x-icon{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.x-icon img{
+  color: var(--background-color-black);
+  width: 15px;
+  height: 15px;
+}
+
+.pipe-icon{
+  display: flex;
+  align-items: center;
+}
+.pipe-icon img{
+  width: 20px;
+  height: 20px;
+}
+
+.plus-icon:hover{
+background-color: var(--background-color-grey);
+}
+
+.modal-card button{
+  margin: auto
+}
+
+.controls{
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.controls span{
+  padding: 0.5rem;
+  font-family: var(--font-family);
+  font-size: var(--font-size-h3);
+}
+
+.controls button{
+  background: transparent;
+  border: none;
 }

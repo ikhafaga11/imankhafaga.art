@@ -1,16 +1,47 @@
 {% extends 'base.html' %} {% block title %}Projects{% endblock %} {% block
-content %} {% if session["user_id"] %}
-<form method="post" autocomplete="off">
-  <label for="title">Title</label>
-  <input name="title" id="title" autocomplete="off" />
-  <label for="cover image">Cover Image</label>
-  <input name="cover_image_url" id="cover_image_url" autocomplete="off" />
-  <input type="submit" value="upload" />
-</form>
+content %} {% if session["user_id"] and show_modal %}
+<div class="projects-form modal">
+  <div class="modal-card">
+    <div class="x-icon">
+      <a href="{{url_for('projects')}}">
+        <img src="{{url_for('static', filename='icons/x.svg')}}" />
+      </a>
+    </div>
+    <h2 class="projects-form-title">
+      <span class="text">Upload Project</span>
+      <span class="emoji">⬆️</span>
+    </h2>
+    <form method="post" autocomplete="off">
+      <label for="title">Title:</label>
+      <input
+        name="title"
+        id="title"
+        placeholder="Add Title"
+        autocomplete="off"
+      />
+      <label for="cover image">Cover Image:</label>
+      <input
+        name="cover_image_url"
+        id="cover_image_url"
+        placeholder="Add Image URL"
+        autocomplete="off"
+      />
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</div>
 {% endif %}
 
 <div class="projects__container">
-
+  <div class="project">
+    <a href="{{url_for('projects', new = 'true')}}">
+      <img
+        src="{{url_for('static', filename='icons/plus.svg')}}"
+        alt="Add"
+        class="plus-icon"
+      />
+    </a>
+  </div>
   {% for project in projects %}
   <div class="project">
     <a href="/projects/{{ project.id }}">
@@ -18,31 +49,56 @@ content %} {% if session["user_id"] %}
       <img src="{{ project.cover_image_url }}" />
       <div class="overlay"></div>
     </a>
+    <div class="divider-top"></div>
     {% if session["user_id"]%}
     <div class="controls">
       <div>
         {% if editing_id == project.id %}
         <a href="{{ url_for('projects') }}">Exit Edit</a>
         {% else %}
-        <a href="{{ url_for('projects', edit = project.id) }}">Edit</a>
+        <a href="{{ url_for('projects', edit = project.id) }}"> <span>✏️</span><span>Edit</span></a>
         {% endif %}
+      </div>
+      <div class="pipe-icon">
+        <img src="{{url_for('static', filename='icons/pipe.svg')}}"></img>
       </div>
       <div>
         <form method="post" action="/projects/{{project.id}}/delete">
-          <button type="submit">Delete</button>
+          <button type="submit"><span>Delete</span> <span>🗑️</span></button>
         </form>
       </div>
     </div>
-    {% endif %}
-
-    {% if editing_id == project.id %}
+    {% endif %} {% if editing_id == project.id %}
+    <div class="projects-form modal">
+  <div class="modal-card">
+    <div class="x-icon">
+      <a href="{{url_for('projects')}}">
+        <img src="{{url_for('static', filename='icons/x.svg')}}" />
+      </a>
+    </div>
+        <h2 class="projects-form-title">
+      <span class="text">Edit Project</span>
+      <span class="emoji">✏️</span>
+    </h2>
     <form method="post" autocomplete="off">
       <label for="title">Title</label>
-      <input name="title" id="title" value="{{project.title}}" autocomplete="off"/>
+      <input
+        name="title"
+        id="title"
+        value="{{project.title}}"
+        autocomplete="off"
+      />
       <label for="cover image url">Cover Image</label>
-      <input name="cover_image_url" id="cover_image_url" value="{{project.cover_image_url}}" autocomplete="off"/>
-      <input type="submit" value="Update"/>
+      <input
+        name="cover_image_url"
+        id="cover_image_url"
+        value="{{project.cover_image_url}}"
+        autocomplete="off"
+      />
+      <button type="submit">Update</button>
     </form>
+  </div>
+  </div>
     {% endif %}
   </div>
   {% endfor %}

@@ -10,7 +10,6 @@ from flask_mail import Mail, Message
 import os
 from dotenv import load_dotenv
 
-
 app = Flask(__name__)
 app.config["MAIL_SERVER"] = "sandbox.smtp.mailtrap.io"
 app.config["MAIL_PORT"] = 2525
@@ -36,6 +35,7 @@ def projects():
     connection = get_flask_database_connection(app)
     repo = ProjectRepository(connection)
     editing_id = request.args.get("edit", type=int)
+    show_new = request.args.get("new") == "true"
 
     if editing_id and request.method == "POST":
         title = request.form["title"]
@@ -55,7 +55,13 @@ def projects():
         # redirect to project to prevent for resubmision
         return redirect(url_for("projects"))
     projects = repo.get_all_projects()
-    return render_template("projects.html", projects=projects, editing_id=editing_id, active_page="projects")
+    return render_template(
+        "projects.html",
+        projects=projects,
+        editing_id=editing_id,
+        show_modal=show_new,
+        active_page="projects",
+    )
 
 
 @app.route("/projects/<int:project_id>", methods=["GET", "POST"])
@@ -94,7 +100,10 @@ def project_detail(project_id):
     contents = content_repo.get_project_contents(project.id)
     project.contents = contents
     return render_template(
-        "project_contents.html", project=project, editing_id=editing_id, active_page="content"
+        "project_contents.html",
+        project=project,
+        editing_id=editing_id,
+        active_page="content",
     )
 
 
@@ -126,7 +135,9 @@ def sketchbook():
         return redirect(url_for("sketchbook"))
 
     sketches = repo.get_all_sketches()
-    return render_template("sketchbook.html", sketches=sketches, active_page="sketchbook")
+    return render_template(
+        "sketchbook.html", sketches=sketches, active_page="sketchbook"
+    )
 
 
 @app.route("/sketchbook/<int:sketch_id>/delete", methods=["POST"])
@@ -153,7 +164,7 @@ def contact():
         name = request.form["name"]
         email = request.form["email"]
         message = request.form["message"]
-        body =f"""
+        body = f"""
         New message from your portfolio contact form
         
         Name:
@@ -179,8 +190,8 @@ def contact():
 
 @app.route("/auth/login", methods=["GET", "POST"])
 def login():
-    if (session.get("user_id")): 
-        return redirect(url_for('home'))
+    if session.get("user_id"):
+        return redirect(url_for("home"))
 
     if request.method == "POST":
         username = request.form["username"]
