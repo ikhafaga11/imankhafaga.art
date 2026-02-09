@@ -1,26 +1,47 @@
-{% extends 'base.html' %}
-{% block title %}Sketchbook{% endblock %}
-{% block content %}
-{% if session["user_id"] %}
-<form method="post" autocomplete="off">
-    <label for="image url">Image</label>
-    <input name="image_url" id="image_url" autocomplete="off" />
-    <input type="submit" value="upload"/>
-</form>
+{% extends 'base.html' %} {% block title %}Sketchbook{% endblock %} {% block
+content %} {% if session["user_id"] and show_modal %}
+<div class="sketches-form modal">
+  <div class="modal-card">
+    <div class="x-icon">
+      <a href="{{url_for('sketchbook')}}">
+        <img src="{{url_for('static', filename='icons/x.svg')}}" />
+      </a>
+    </div>
+    <h2 class="sketches-form-title">
+      <span class="text">Upload Sketch</span>
+      <span class="emoji">⬆️</span>
+    </h2>
+    <form method="post" autocomplete="off">
+      <label for="image url">Image</label>
+      <input name="image_url" id="image_url" placeholder="http://www.example.com/" autocomplete="off" />
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</div>
 {% endif %}
 <div class="sketches">
-{% for sketch in sketches%}
-<div class="sketch">
-    <img src="{{sketch.image_url}}"/>
+      <div class="sketch">
+    <a href="{{url_for('sketchbook', new = 'true')}}">
+      <img
+        src="{{url_for('static', filename='icons/plus.svg')}}"
+        alt="Add"
+        class="plus-icon"
+      />
+    </a>
+  </div>
+  {% for sketch in sketches%}
+  <div class="sketch">
+    <img src="{{sketch.image_url}}" />
     {% if session["user_id"]%}
-    <div>
-        <form method="post" action="/sketchbook/{{ sketch.id }}/delete">
-            <button type="submit">Delete</button>
-        </form>
+    <div class="divider-top"></div>
+    <div class="controls">
+      <form method="post" action="/sketchbook/{{ sketch.id }}/delete">
+        <button type="submit"><span>Delete</span> <span>🗑️</span></button>
+      </form>
     </div>
     {% endif %}
-</div>
-{% endfor %}
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

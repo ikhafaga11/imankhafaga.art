@@ -129,6 +129,7 @@ def delete_project(project_id):
 def sketchbook():
     connection = get_flask_database_connection(app)
     repo = SketchbookRepository(connection)
+    show_new = request.args.get("new") == "true"
     if request.method == "POST":
         image_url = request.form["image_url"]
         repo.add_sketch(image_url=image_url)
@@ -136,7 +137,7 @@ def sketchbook():
 
     sketches = repo.get_all_sketches()
     return render_template(
-        "sketchbook.html", sketches=sketches, active_page="sketchbook"
+        "sketchbook.html", sketches=sketches, active_page="sketchbook",show_modal=show_new,
     )
 
 
