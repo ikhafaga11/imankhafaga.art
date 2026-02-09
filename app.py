@@ -72,6 +72,8 @@ def project_detail(project_id):
     project = project_repo.get_project(project_id)
 
     editing_id = request.args.get("edit", type=int)
+    show_new = request.args.get("new") == "true"
+    lightbox = request.args.get("modal", type=int)
 
     if request.method == "POST" and editing_id:
         caption = request.form["caption"]
@@ -104,6 +106,8 @@ def project_detail(project_id):
         project=project,
         editing_id=editing_id,
         active_page="content",
+        show_modal=show_new,
+        lightbox=lightbox,
     )
 
 

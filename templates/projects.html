@@ -23,7 +23,7 @@ content %} {% if session["user_id"] and show_modal %}
       <input
         name="cover_image_url"
         id="cover_image_url"
-        placeholder="http://www.example.com/"
+        placeholder="https://www.example.com/"
         autocomplete="off"
       />
       <button type="submit">Upload</button>
@@ -33,6 +33,8 @@ content %} {% if session["user_id"] and show_modal %}
 {% endif %}
 
 <div class="projects__container">
+
+  {% if session['user_id']%}
   <div class="project">
     <a href="{{url_for('projects', new = 'true')}}">
       <img
@@ -42,6 +44,7 @@ content %} {% if session["user_id"] and show_modal %}
       />
     </a>
   </div>
+  {% endif %}
   {% for project in projects %}
   <div class="project">
     <a href="/projects/{{ project.id }}">
@@ -49,8 +52,8 @@ content %} {% if session["user_id"] and show_modal %}
       <img src="{{ project.cover_image_url }}" />
       <div class="overlay"></div>
     </a>
-    <div class="divider-top"></div>
     {% if session["user_id"]%}
+    <div class="divider-top"></div>
     <div class="controls">
       <div>
         {% if editing_id == project.id %}

@@ -5,6 +5,7 @@
   --background-color-white: white;
   --background-color-yellow: #ffc107;
   --background-color-black-opacity: rgba(0, 0, 0, 0.756);
+  --background-color-grey: #f0f0f0;
   --font-size-h1: 2.5rem;
   --font-size-h2: 1.5rem;
   --font-size-h3: 1rem;
@@ -130,13 +131,6 @@ nav ul li a {
   border: 0;
   object-fit: cover;
   border-radius: 0.5rem;
-}
-
-.projects__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 0.5rem;
 }
 
 .projects__container {
@@ -296,7 +290,7 @@ nav ul li a {
   display: block;
 }
 
-.project-contents__container {
+/* .project-contents__container {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -321,6 +315,10 @@ nav ul li a {
   max-width: 100%;
 }
 
+.project-content a{
+  text-decoration: none;
+  color: var(--text-color-black)
+} */
 .divider-bottom {
   margin: auto;
   width: 80%;
@@ -334,16 +332,6 @@ nav ul li a {
   width: 80%;
   border-bottom: 1px solid black;
   height: 1px;
-  padding: 0.5rem;
-  
-}
-
-.project-contents-title {
-  width: 100%;
-  text-align: left;
-  text-decoration: line-through;
-  transform: rotate(180deg);
-  margin: 0;
   padding: 0.5rem;
 }
 
@@ -373,8 +361,7 @@ nav ul li a {
 
 .contact-title .emoji,
 .auth-form-title .emoji,
-.projects-form-title .emoji
-.sketches-form-title .emoji {
+.projects-form-title .emoji .sketches-form-title .emoji {
   margin-left: 0.25rem;
 }
 
@@ -443,7 +430,6 @@ nav ul li a {
 
 /* PROJECTS FORM  */
 
-
 .projects-form form,
 .sketches-form form {
   display: flex;
@@ -453,7 +439,7 @@ nav ul li a {
 
 /* MODAL */
 
-.modal{
+.modal {
   position: fixed;
   inset: 0;
   background-color: var(--background-color-black-opacity);
@@ -464,54 +450,122 @@ nav ul li a {
   justify-content: center;
 }
 
-.modal-card{
+.modal-card {
   width: min(90%, 420px);
   background-color: var(--background-color-white);
-    padding: 2rem;
+  padding: 2rem;
   border-radius: 1rem;
 }
 
-.x-icon{
+.x-icon {
   display: flex;
   justify-content: flex-end;
 }
 
-.x-icon img{
+.x-icon img {
   color: var(--background-color-black);
   width: 15px;
   height: 15px;
 }
 
-.pipe-icon{
+.pipe-icon {
   display: flex;
   align-items: center;
 }
-.pipe-icon img{
+.pipe-icon img {
   width: 20px;
   height: 20px;
 }
 
-.plus-icon:hover{
-background-color: var(--background-color-grey);
+.plus-icon {
+  border: solid 0.1rem var(--background-color-black);
 }
 
-.modal-card button{
-  margin: auto
+
+
+.plus-icon:hover {
+  background-color: var(--background-color-grey);
 }
 
-.controls{
+.modal-card button {
+  margin: auto;
+}
+
+.controls {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
 }
 
-.controls span{
+.controls span {
   padding: 0.5rem;
   font-family: var(--font-family);
   font-size: var(--font-size-h3);
 }
 
-.controls button{
+.controls button {
   background: transparent;
   border: none;
+}
+
+/* PROJECT CONTENT */
+
+.project-content__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.project-contents__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1200px;
+  gap: 1rem;
+}
+
+.project-content {
+  aspect-ratio: 1/1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-content a {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-content img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+
+.project-contents-title{
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+  text-decoration: line-through;
+
+}
+
+.project-content .controls  {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.project-content .controls a{
+  text-decoration: none;
+  color: var(--text-color-black);
 }

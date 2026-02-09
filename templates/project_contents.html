@@ -1,38 +1,53 @@
 {%extends 'base.html'%} {% block title %}{{project.title}}{% endblock %} {%
-block content %} {% if session['user_id']%}
-<form method="post" autocomplete="off">
-  <label for="caption">Caption</label>
-  <input name="caption" id="caption" autocomplete="off" />
-  <label for="image url">Image</label>
-  <input name="image_url" id="image_url" autocomplete="off" />
-  <input type="submit" value="upload" />
-</form>
+block content %} {% if session['user_id'] and show_modal%}
+<div class="projects-form modal">
+  <div class="modal-card">
+    <div class="x-icon">
+      <a href="/projects/{{project.id}}">
+        <img src="{{url_for('static', filename='icons/x.svg')}}" />
+      </a>
+    </div>
+    <h2 class="projects-form-title">
+      <span class="text">Upload Project</span>
+      <span class="emoji">⬆️</span>
+    </h2>
+    <form method="post" autocomplete="off">
+      <label for="caption">Caption</label>
+      <input name="caption" id="caption" placeholder="Add a caption…" autocomplete="off" />
+      <label for="image url">Image</label>
+      <input name="image_url" id="image_url" placeholder="https://www.example.com/" autocomplete="off" />
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</div>
 {% endif %}
-
+<div class="project-content__wrapper">
+<h1 class="project-contents-title">{{project.title}}</h1>
 <div class="project-contents__container">
-  <h1 class="project-contents-title">{{project.title}}</h1>
+  
   {% for content in project.contents %}
   <div class="project-content">
+    <a href="{{ url_for('project_detail', project_id = project.id, modal=content.id) }}">
     <img src="{{content.image_url}}" />
-    <div class="divider-top"></div>
-    <p>{{content.caption}}</p>
-    <div class="divider-bottom"></div>
-
+  </a>
+  <p>{{content.caption}}</p>
     {% if session['user_id'] %}
-    <div class="controls">
+    <div class="divider-top"></div>
+        <div class="controls">
       <div>
         {% if editing_id == content.id %}
-        <a href="/projects/{{ project.id }}">Exit Edit</a>
+        <a href="{{ url_for('project_detail', project_id = project.id) }}">Exit Edit</a>
         {% else %}
-        <a href="/projects/{{ project.id }}?edit={{content.id}}">Edit</a>
+        <a href="/projects/{{ project.id }}?edit={{content.id}}"> <span>✏️</span><span>Edit</span></a>
         {% endif %}
       </div>
+      <div class="pipe-icon">
+        <img src="{{url_for('static', filename='icons/pipe.svg')}}"></img>
+      </div>
       <div>
-        {% if session["user_id"] %}
         <form method="post" action="/projects/{{ project.id }}/delete/content_id/{{ content.id }}">
-        <button type="submit">Delete</button>
+          <button type="submit"><span>Delete</span> <span>🗑️</span></button>
         </form>
-        {% endif %}
       </div>
     </div>
     {% endif %}
@@ -41,12 +56,35 @@ block content %} {% if session['user_id']%}
   {% if editing_id == content.id and session['user_id'] %}
   <form method="POST" autocomplete="off">
     <label for="caption">Caption</label>
-      <input name="caption" id="caption" autocomplete="off" value="{{content.caption}}"/>
-      <label for="image url">Image</label>
-      <input name="image_url" id="image_url" autocomplete="off" value="{{content.image_url}}"/>
-      <input type="submit" value="update"/>
+    <input
+      name="caption"
+      id="caption"
+      autocomplete="off"
+      value="{{content.caption}}"
+    />
+    <label for="image url">Image</label>
+    <input
+      name="image_url"
+      id="image_url"
+      autocomplete="off"
+      value="{{content.image_url}}"
+    />
+    <input type="submit" value="update" />
   </form>
+  
+  {% endif %} {% endfor %}
+
+    {% if session['user_id']%}
+  <div class="project-content no-align">
+    <a href="{{ url_for('project_detail', project_id=project.id, new='true') }}">
+      <img
+        src="{{url_for('static', filename='icons/plus.svg')}}"
+        alt="Add"
+        class="plus-icon"
+      />
+    </a>
+  </div>
   {% endif %}
-  {% endfor %}
+</div>
 </div>
 {% endblock %}
