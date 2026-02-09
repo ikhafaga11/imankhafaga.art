@@ -46,6 +46,9 @@
             >Contact</a
           >
         </li>
+               {% if session['user_id'] %}
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+        {% endif %}
       </ul>
     </nav>
 
@@ -81,6 +84,9 @@
             >Contact</a
           >
         </li>
+        {% if session['user_id'] %}
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+        {% endif %}
         <!-- <div class="nav-right">
           {% if session['user_id'] %}
           <li><a href="{{url_for('login')}}">Admin</a></li>
