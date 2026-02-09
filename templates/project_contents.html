@@ -13,9 +13,9 @@ block content %} {% if session['user_id'] and show_modal%}
     </h2>
     <form method="post" autocomplete="off">
       <label for="caption">Caption</label>
-      <input name="caption" id="caption" placeholder="Add a caption…" autocomplete="off" />
+      <input name="caption" placeholder="Add a caption…" autocomplete="off" />
       <label for="image url">Image</label>
-      <input name="image_url" id="image_url" placeholder="https://www.example.com/" autocomplete="off" />
+      <input name="image_url" placeholder="https://www.example.com/" autocomplete="off" />
       <button type="submit">Upload</button>
     </form>
   </div>
@@ -58,14 +58,12 @@ block content %} {% if session['user_id'] and show_modal%}
     <label for="caption">Caption</label>
     <input
       name="caption"
-      id="caption"
       autocomplete="off"
       value="{{content.caption}}"
     />
     <label for="image url">Image</label>
     <input
       name="image_url"
-      id="image_url"
       autocomplete="off"
       value="{{content.image_url}}"
     />

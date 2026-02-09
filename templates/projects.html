@@ -15,14 +15,12 @@ content %} {% if session["user_id"] and show_modal %}
       <label for="title">Title:</label>
       <input
         name="title"
-        id="title"
         placeholder="Project 1"
         autocomplete="off"
       />
       <label for="cover image">Cover Image:</label>
       <input
         name="cover_image_url"
-        id="cover_image_url"
         placeholder="https://www.example.com/"
         autocomplete="off"
       />
@@ -87,14 +85,12 @@ content %} {% if session["user_id"] and show_modal %}
       <label for="title">Title</label>
       <input
         name="title"
-        id="title"
         value="{{project.title}}"
         autocomplete="off"
       />
       <label for="cover image url">Cover Image</label>
       <input
         name="cover_image_url"
-        id="cover_image_url"
         value="{{project.cover_image_url}}"
         autocomplete="off"
       />
