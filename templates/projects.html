@@ -54,11 +54,7 @@ content %} {% if session["user_id"] and show_modal %}
     <div class="divider-top"></div>
     <div class="controls">
       <div>
-        {% if editing_id == project.id %}
-        <a href="{{ url_for('projects') }}">Exit Edit</a>
-        {% else %}
         <a href="{{ url_for('projects', edit = project.id) }}"> <span>✏️</span><span>Edit</span></a>
-        {% endif %}
       </div>
       <div class="pipe-icon">
         <img src="{{url_for('static', filename='icons/pipe.svg')}}"></img>

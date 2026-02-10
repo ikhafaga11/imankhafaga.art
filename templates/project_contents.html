@@ -32,11 +32,7 @@ block content %} {% if session['user_id'] and show_modal%}
       {% if session['user_id'] %}
       <div class="controls">
         <div>
-          {% if editing_id == content.id %}
-          <a href="{{ url_for('project_detail', project_id = project.id) }}">Exit Edit</a>
-          {% else %}
           <a href="/projects/{{ project.id }}?edit={{content.id}}"> <span>✏️</span><span>Edit</span></a>
-          {% endif %}
         </div>
         <div class="pipe-icon">
           <img src="{{url_for('static', filename='icons/pipe.svg')}}"></img>
@@ -58,7 +54,6 @@ block content %} {% if session['user_id'] and show_modal%}
       <input name="image_url" autocomplete="off" value="{{content.image_url}}" />
       <input type="submit" value="update" />
     </form>
-
     {% endif %} {% endfor %}
 
     {% if session['user_id']%}
