@@ -36,6 +36,7 @@ def projects():
     connection = get_flask_database_connection(app)
     repo = ProjectRepository(connection)
     editing_id = request.args.get("edit", type=int)
+    deleting_id = request.args.get("delete", type=int)
     show_new = request.args.get("new") == "true"
 
     if editing_id and request.method == "POST":
@@ -43,6 +44,7 @@ def projects():
         cover_image_url = request.form["cover_image_url"]
         model = Project(id=editing_id, cover_image_url=cover_image_url, title=title)
         repo.update_project(model)
+        flash("Project successfully updated.", "success")
         return redirect(url_for("projects"))
 
     if request.method == "POST":
@@ -54,12 +56,14 @@ def projects():
         # insert new project
         repo.post_project(model)
         # redirect to project to prevent for resubmision
+        flash("New project added.", "success")
         return redirect(url_for("projects"))
     projects = repo.get_all_projects()
     return render_template(
         "projects.html",
         projects=projects,
         editing_id=editing_id,
+        deleting_id=deleting_id,
         show_modal=show_new,
         active_page="projects",
     )
@@ -82,6 +86,7 @@ def project_detail(project_id):
             project_id=project.id, caption=caption, image_url=image_url, id=editing_id
         )
         content_repo.update_content(model)
+        flash("Project content successfully updated.", "success")
         return redirect(url_for("project_detail", project_id=project.id))
 
     if request.method == "POST":
@@ -97,6 +102,7 @@ def project_detail(project_id):
         # add new content to project content list
         project.add_content(new_content)
         # redirect to project detailt to prevent form resubmission
+        flash("New project content added.", 'success')
         return redirect(url_for("project_detail", project_id=project.id))
 
     contents = content_repo.get_project_contents(project.id)
@@ -117,6 +123,7 @@ def delete_project_detail(project_id, content_id):
     connection = get_flask_database_connection(app)
     repo = ProjectContentRepository(connection)
     repo.delete_content(content_id)
+    flash("Project content deleted successfully.", "success")
     return redirect(url_for("project_detail", project_id=project_id))
 
 
@@ -125,6 +132,7 @@ def delete_project(project_id):
     connection = get_flask_database_connection(app)
     repo = ProjectRepository(connection)
     repo.delete_project(id=project_id)
+    flash("Project deleted successfully.", "success")
     return redirect(url_for("projects"))
 
 
@@ -136,6 +144,7 @@ def sketchbook():
     if request.method == "POST":
         image_url = request.form["image_url"]
         repo.add_sketch(image_url=image_url)
+        flash("New sketch added.", "success")
         return redirect(url_for("sketchbook"))
 
     sketches = repo.get_all_sketches()
@@ -149,6 +158,7 @@ def delete_sketch(sketch_id):
     connection = get_flask_database_connection(app)
     repo = SketchbookRepository(connection)
     repo.delete_sketch(id=sketch_id)
+    flash("Sketch deleted successfully.", "success")
     return redirect(url_for("sketchbook"))
 
 
