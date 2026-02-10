@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" cont🙏ent="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Iman Khafaga{% endblock %} - ImanKhafaga.Art</title>
+    <link class="ik-icon" rel="icon" type="" href="{{url_for('static', filename='icons/ik.svg')}}"/>
     <link rel="stylesheet" href="https://use.typekit.net/tnm3wfk.css" />
     <link
       rel="stylesheet"
@@ -84,13 +85,6 @@
         {% if session['user_id'] %}
         <li><a href="{{url_for('logout')}}">Logout</a></li>
         {% endif %}
-        <!-- <div class="nav-right">
-          {% if session['user_id'] %}
-          <li><a href="{{url_for('login')}}">Admin</a></li>
-          {% else %}
-          <li><a href="{{url_for('logout')}}">Logout</a></li>
-          {% endif %}
-        </div> -->
       </ul>
     </nav>
 

@@ -625,3 +625,10 @@ nav ul li a {
   margin: 0 auto;
   text-align: center;
 }
+
+
+/* favicon icon */
+.ik-icon{
+    width: 48px;
+  height: 48px;
+}
