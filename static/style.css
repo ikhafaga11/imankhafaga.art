@@ -19,6 +19,11 @@
 .p--red{
   color: var(--text-color-red);
 }
+
+.controls a,
+.controls button {
+  cursor: pointer;
+}
 *,
 *::before,
 *::after {
