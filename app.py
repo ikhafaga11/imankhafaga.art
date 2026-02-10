@@ -6,6 +6,7 @@ from lib.sketchbook_repository import SketchbookRepository
 from lib.auth_repository import AuthRepository
 from lib.project_content import ProjectContent
 from lib.project import Project
+from lib.auth_service import authenticate, InvalidCredentialsError
 from flask_mail import Mail, Message
 import os
 from dotenv import load_dotenv
@@ -194,17 +195,26 @@ def contact():
 @app.route("/auth/login", methods=["GET", "POST"])
 def login():
     if session.get("user_id"):
+        flash("You are already logged in", "success")
         return redirect(url_for("home"))
 
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+
         connection = get_flask_database_connection(app)
         repo = AuthRepository(connection)
-        user = repo.get_user(username, password)
-        session.clear()
-        session["user_id"] = user.id
-        return redirect(url_for("home"))
+
+        try:
+            user = authenticate(username, password, repo)
+            session.clear()
+            session["user_id"] = user.id
+            return redirect(url_for("home"))
+
+        except InvalidCredentialsError:
+            flash("User does not exist", "error")
+            return redirect(url_for('login'))
+
     return render_template("login.html")
 
 

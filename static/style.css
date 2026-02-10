@@ -558,3 +558,33 @@ nav ul li a {
   margin: auto;
   padding: 1rem;
 }
+
+.flash-container {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.flash {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.flash-error {
+  background-color: #ffe5e5;
+  color: #900;
+}
+
+.flash-success {
+  background-color: #e6ffea;
+  color: #0a5;
+}
+
+.flash-info {
+  background-color: #eef3ff;
+  color: #234;
+}
