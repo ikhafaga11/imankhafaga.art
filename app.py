@@ -219,18 +219,19 @@ def login():
             user = authenticate(username, password, repo)
             session.clear()
             session["user_id"] = user.id
+            flash("Successfully logged in.", "success")
             return redirect(url_for("home"))
 
         except InvalidCredentialsError:
             flash("User does not exist", "error")
             return redirect(url_for('login'))
-
     return render_template("login.html")
 
 
 @app.route("/auth/logout")
 def logout():
     session.clear()
+    flash("Successfully logged out.", "success")
     return redirect(url_for("home"))
 
 
