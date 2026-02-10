@@ -366,13 +366,16 @@ nav ul li a {
 .contact-title .text,
 .auth-form .text,
 .projects-form .text,
-.sketches-form .text {
+.sketches-form .text,
+.submitted-form__container .text {
   display: inline-block;
 }
 
 .contact-title .emoji,
 .auth-form-title .emoji,
-.projects-form-title .emoji .sketches-form-title .emoji {
+.projects-form-title .emoji,
+.sketches-form-title .emoji,
+.submitted-form__container .emoji {
   margin-left: 0.25rem;
 }
 
@@ -610,4 +613,13 @@ nav ul li a {
 .flash-info {
   background-color: #eef3ff;
   color: #234;
+}
+
+
+/* SUBMITTED FORM */
+.submitted-form__container{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
 }
