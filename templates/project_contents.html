@@ -27,7 +27,7 @@ block content %} {% if session['user_id'] and show_modal%}
 
     {% for content in project.contents %}
     <div class="project-content">
-        <img src="{{content.image_url}}" />
+      <img src="{{content.image_url}}" />
       <p>{{content.caption}}</p>
       {% if session['user_id'] %}
       <div class="controls">
@@ -46,19 +46,32 @@ block content %} {% if session['user_id'] and show_modal%}
       {% endif %}
     </div>
 
-    {% if editing_id == content.id and session['user_id'] %}
-    <form method="POST" autocomplete="off">
-      <label for="caption">Caption</label>
-      <input name="caption" autocomplete="off" value="{{content.caption}}" />
-      <label for="image url">Image</label>
-      <input name="image_url" autocomplete="off" value="{{content.image_url}}" />
-      <input type="submit" value="update" />
-    </form>
+    {% if editing_id == content.id and session['user_id'] %}`
+    <div class="modal">
+      <div class="modal-card">
+        <div class="x-icon">
+          <a href="{{url_for('project_detail', project_id = project.id)}}">
+            <img src="{{url_for('static', filename='icons/x.svg')}}" />
+          </a>
+        </div>
+        <h2 class="projects-form-title">
+          <span class="text">Edit Content</span>
+          <span class="emoji">✏️</span>
+        </h2>
+        <form method="POST" autocomplete="off">
+          <label for="caption">Caption</label>
+          <input name="caption" autocomplete="off" value="{{content.caption}}" />
+          <label for="image url">Image</label>
+          <input name="image_url" autocomplete="off" value="{{content.image_url}}" />
+          <input type="submit" value="update" />
+        </form>
+      </div>
+    </div>
     {% endif %} {% endfor %}
 
     {% if session['user_id']%}
 
-      <div class="plus-icon__container">
+    <div class="plus-icon__container">
       <a href="{{ url_for('project_detail', project_id=project.id, new='true') }}">
         <img src="{{url_for('static', filename='icons/plus.svg')}}" alt="Add" class="plus-icon" />
       </a>
