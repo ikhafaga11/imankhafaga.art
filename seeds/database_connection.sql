@@ -18,7 +18,7 @@ CREATE TABLE
         image_url VARCHAR(255) NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         project_id INTEGER,
-        constraint fk_project_id foreign key (project_id) REFERENCES projects (id)
+        constraint fk_project_id foreign key (project_id) REFERENCES projects (id) ON DELETE CASCADE
     );
 
 CREATE TABLE
