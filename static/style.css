@@ -550,3 +550,10 @@ nav ul li a {
 .project-contents-title{
   margin: 0;
 }
+
+.plus-icon__container{
+  min-width: 300px;
+  max-width: 100px;
+  margin: auto;
+  padding: 1rem;
+}

@@ -62,11 +62,13 @@ block content %} {% if session['user_id'] and show_modal%}
     {% endif %} {% endfor %}
 
     {% if session['user_id']%}
-    <div class="project-content no-align">
+
+      <div class="plus-icon__container">
       <a href="{{ url_for('project_detail', project_id=project.id, new='true') }}">
         <img src="{{url_for('static', filename='icons/plus.svg')}}" alt="Add" class="plus-icon" />
       </a>
     </div>
+
     {% endif %}
   </div>
 </div>
