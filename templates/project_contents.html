@@ -47,7 +47,7 @@ block content %} {% if session['user_id'] and show_modal%}
     </div>
 
     {% if editing_id == content.id and session['user_id'] %}`
-    <div class="modal">
+    <div class="projects-form modal">
       <div class="modal-card">
         <div class="x-icon">
           <a href="{{url_for('project_detail', project_id = project.id)}}">
@@ -63,7 +63,7 @@ block content %} {% if session['user_id'] and show_modal%}
           <input name="caption" autocomplete="off" value="{{content.caption}}" />
           <label for="image url">Image</label>
           <input name="image_url" autocomplete="off" value="{{content.image_url}}" />
-          <input type="submit" value="update" />
+          <button type="submit">Update</button>
         </form>
       </div>
     </div>

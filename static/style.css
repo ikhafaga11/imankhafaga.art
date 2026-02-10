@@ -530,6 +530,11 @@ nav ul li a {
   padding: 1rem;
 }
 
+.project-content a {
+  text-decoration: none;
+  color: var(--text-color-black);
+}
+
 .project-content p{
   text-align: center;
 }
