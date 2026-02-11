@@ -4,7 +4,7 @@ from lib.auth import Auth
 
 
 def test_when_incorrect_username_return_exception(db_connection):
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("db/seed.sql")
     repo = AuthRepository(db_connection)
     with pytest.raises(Exception) as e:
         username = "ikhafaga"  # missing 1 char
@@ -15,7 +15,7 @@ def test_when_incorrect_username_return_exception(db_connection):
 
 
 def test_when_incorrect_password_return_exception(db_connection):
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("db/seed.sql")
     repo = AuthRepository(db_connection)
     with pytest.raises(Exception) as e:
         username = "ikhafaga1"  # correct
@@ -26,7 +26,7 @@ def test_when_incorrect_password_return_exception(db_connection):
 
 
 def test_case_sensitive_username(db_connection):
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("db/seed.sql")
     repo = AuthRepository(db_connection)
     with pytest.raises(Exception) as e:
         username = "Ikhafaga1"  # uppercase I
@@ -37,7 +37,7 @@ def test_case_sensitive_username(db_connection):
 
 
 def test_case_sensitive_password(db_connection):
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("db/seed.sql")
     repo = AuthRepository(db_connection)
     with pytest.raises(Exception) as e:
         username = "ikhafaga1"  # correct
@@ -48,7 +48,7 @@ def test_case_sensitive_password(db_connection):
 
 
 def test_correct_credentials(db_connection):
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("db/seed.sql")
     repo = AuthRepository(db_connection)
     username = "ikhafaga1"  # correct
     password = "Password123!"  # correct
