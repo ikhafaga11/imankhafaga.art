@@ -193,7 +193,8 @@ def contact():
         msg = Message(
             subject=f"[Portfolio Contact] {name}",
             reply_to=email,
-            recipients=["ikhafaga@live.co.uk"],
+            sender=os.getenv("MAIL_USERNAME"),
+            recipients=[os.getenv("MAIL_USERNAME")],
             body=body,
         )
         mail.send(msg)
