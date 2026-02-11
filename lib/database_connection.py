@@ -17,6 +17,8 @@ class DatabaseConnection:
     # to localhost and select the database name given in argument.
     def connect(self):
         database_url = os.getenv("DATABASE_URL")
+        if not database_url:
+            database_url = "postgresql://localhost/imanartist"
         
         if not database_url:
             raise Exception("DATABASE_URL is not set")
