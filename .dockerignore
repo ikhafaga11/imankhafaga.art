@@ -24,3 +24,5 @@ venv/
 
 # Tests & local-only files
 tests/
+
+node_modules
