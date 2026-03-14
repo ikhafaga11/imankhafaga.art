@@ -114,12 +114,11 @@ nav ul {
 }
 
 nav ul li {
+  text-align: center;
   flex: 1;
   list-style: none;
   align-content: center;
-  text-align: end;
   padding: 0.5rem;
-  text-align: center;
 }
 
 nav ul li a {
