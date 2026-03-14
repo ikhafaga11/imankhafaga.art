@@ -55,15 +55,11 @@ h3 {
   font-weight: lighter;
 }
 
-/* .background{
-  background-color: var(--background-color-grey);
-  height: 100%;
-}
 .site-wrapper{
   margin: auto;
   max-width: 1440px;
   background-color: var(--background-color-white);
-} */
+}
 
 main {
   flex: 1;
