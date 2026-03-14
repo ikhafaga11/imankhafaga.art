@@ -188,6 +188,7 @@ nav ul li a {
   width: 100%;
   aspect-ratio: 3/2;
   display: block;
+  object-fit: cover;
 }
 
 .projects__container a {
