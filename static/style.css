@@ -55,6 +55,16 @@ h3 {
   font-weight: lighter;
 }
 
+/* .background{
+  background-color: var(--background-color-grey);
+  height: 100%;
+}
+.site-wrapper{
+  margin: auto;
+  max-width: 1440px;
+  background-color: var(--background-color-white);
+} */
+
 main {
   flex: 1;
   display: flex;
@@ -146,15 +156,10 @@ nav ul li a {
 
 .projects__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 1rem;
   padding: 1rem;
-}
 
-.project {
-  padding: 0;
-  position: relative;
-  overflow: hidden;
 }
 
 .overlay {
@@ -185,7 +190,7 @@ nav ul li a {
 
 .projects__container img {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 3/2;
   display: block;
 }
 
@@ -274,15 +279,6 @@ nav ul li a {
   width: 100%;
   font-size: 0.75rem;
   padding: 0.5rem;
-}
-
-@media (min-width: 758px) {
-  .main-nav {
-    display: flex;
-  }
-  .mobile-nav {
-    display: none;
-  }
 }
 
 .sketches {
@@ -631,4 +627,14 @@ nav ul li a {
 .ik-icon{
     width: 48px;
   height: 48px;
+}
+
+
+@media (min-width: 758px) {
+  .main-nav {
+    display: flex;
+  }
+  .mobile-nav {
+    display: none;
+  }
 }
