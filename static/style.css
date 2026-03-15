@@ -640,3 +640,24 @@ nav ul li a {
   border-radius: 0.75rem;
   }
 }
+
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: #333;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  transition: opacity 0.3s;
+}
+
+#backToTop:hover {
+  background: #555;
+}
