@@ -240,6 +240,12 @@ nav ul li a {
   color: var(--icon-linkedin-color);
 }
 
+
+.project-content img:hover,  
+.sketches img:hover {
+border: 1px solid var(--background-color-grey);
+filter: brightness(80%);
+}
 /* MOBILE NAV */
 
 .mobile-nav {
@@ -661,3 +667,4 @@ nav ul li a {
 #backToTop:hover {
   background: #555;
 }
+
