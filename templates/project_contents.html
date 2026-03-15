@@ -27,7 +27,9 @@ block content %} {% if session['user_id'] and show_modal%}
 
     {% for content in project.contents %}
     <div class="project-content">
+      <a href="{{content.image_url}}">
       <img src="{{content.image_url}}" />
+      </a>
       <p>{{content.caption}}</p>
       {% if session['user_id'] %}
       <div class="controls">

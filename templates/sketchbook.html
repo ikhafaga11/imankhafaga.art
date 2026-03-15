@@ -36,7 +36,9 @@ content %} {% if session["user_id"] and show_modal %}
   </div>
   {% endif %} {% for sketch in sketches%}
   <div class="sketch">
+    <a href="{{sketch.image_url}}">
     <img src="{{sketch.image_url}}" />
+    </a>
     {% if session["user_id"]%}
     <div class="divider-top"></div>
     <div class="controls">
