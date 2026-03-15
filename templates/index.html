@@ -1,10 +1,17 @@
-{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block hero%}
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block hero %}
 <div class="video-wrapper">
-  <iframe
-    src="https://www.youtube.com/embed/isSZh-9YScM?autoplay=1&mute=1&loop=1&playlist=isSZh-9YScM&controls=0&modestbranding=1&rel=0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
-  >
-  </iframe>
+<video id="heroVideo" autoplay muted loop playsinline>
+  <source src="/static/videos/hero.mp4" type="video/mp4">
+</video>
+
+<script>
+  document.addEventListener('click', () => {
+    const video = document.getElementById('heroVideo');
+    video.muted = false;       // unmute
+    video.play();              // start playback with sound
+  }, { once: true });
+</script>
 </div>
 {% endblock %}
