@@ -535,7 +535,7 @@ nav ul li a {
 }
 
 .project-content {
-  aspect-ratio: 16/9;
+  /* aspect-ratio: 16/9; */
   padding: 1rem;
 }
 
