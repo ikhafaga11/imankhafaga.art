@@ -11,11 +11,13 @@ content %} {% if session["user_id"] and show_modal %}
       <span class="text">Upload Project</span>
       <span class="emoji">⬆️</span>
     </h2>
-    <form method="post" autocomplete="off">
+    <form method="post" autocomplete="off" enctype="multipart/form-data">
       <label for="title">Title:</label>
       <input name="title" placeholder="Project 1" autocomplete="off" />
       <label for="cover image">Cover Image:</label>
       <input name="cover_image_url" placeholder="https://www.example.com/" autocomplete="off" />
+      <label for="file upload">Upload Cover Image: </label>
+      <input type="file" name="file" accept="image/png, image/jpeg" />
       <button type="submit">Upload</button>
     </form>
   </div>

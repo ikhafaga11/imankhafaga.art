@@ -10,6 +10,7 @@ from lib.auth_service import authenticate, InvalidCredentialsError
 from flask_mail import Mail, Message
 import os
 from dotenv import load_dotenv
+from lib.cloudinary_service import CloudinaryService
 
 load_dotenv()
 app = Flask(__name__)
@@ -50,7 +51,10 @@ def projects():
     if request.method == "POST":
         # get form values
         title = request.form["title"]
-        cover_image_url = request.form["cover_image_url"]
+        file = request.files["file"]
+        cs = CloudinaryService(file)
+        upload = cs.upload()
+        cover_image_url = upload["secure_url"]
         # instantiate model
         model = Project(title=title, cover_image_url=cover_image_url)
         # insert new project
