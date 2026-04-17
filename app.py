@@ -52,11 +52,9 @@ def projects():
         # get form values
         title = request.form["title"]
         file = request.files["file"]
-        cs = CloudinaryService(file)
-        upload = cs.upload()
-        cover_image_url = upload["secure_url"]
+        url = CloudinaryService.upload(file, f"Projects/{title}/Cover Image")
         # instantiate model
-        model = Project(title=title, cover_image_url=cover_image_url)
+        model = Project(title=title, cover_image_url=url)
         # insert new project
         repo.post_project(model)
         # redirect to project to prevent for resubmision
