@@ -150,8 +150,10 @@ def sketchbook():
     repo = SketchbookRepository(connection)
     show_new = request.args.get("new") == "true"
     if request.method == "POST":
-        image_url = request.form["image_url"]
-        repo.add_sketch(image_url=image_url)
+        # image_url = request.form["image_url"]
+        file = request.files["file"]
+        url = CloudinaryService.upload(file, "SketchBook")
+        repo.add_sketch(image_url=url)
         flash("New sketch added.", "success")
         return redirect(url_for("sketchbook"))
 
