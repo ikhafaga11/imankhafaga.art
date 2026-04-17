@@ -69,14 +69,11 @@ content %} {% if session["user_id"] and show_modal %}
         <form method="post" autocomplete="off" enctype="multipart/form-data">
           <label for="title">Title</label>
           <input name="title" value="{{project.title}}" autocomplete="off" />
-          
           <label for="current-image">Cover Image</label>
           <img class="current-image" name="current-image" src="{{project.cover_image_url}}"/>
-          
           <label for="modify_file">Replace Cover Image</label>
             <img id="preview" src="" alt="Image preview">
               <input id="file-input" class="custom-file-upload" type="file" name="modify_file" accept="image/png, image/jpeg"  required/>
-          
           <button type="submit">Update</button>
         </form>
       </div>

@@ -402,7 +402,8 @@ nav ul li a {
 .auth-form form label,
 .projects-form form label,
 .sketches-form form label {
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-h4);
+  text-decoration: underline;
 }
 
 .contact-form form button,
