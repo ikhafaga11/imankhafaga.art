@@ -17,7 +17,7 @@ content %} {% if session["user_id"] and show_modal %}
       <!-- <label for="cover image">Cover Image:</label>
       <input name="cover_image_url" placeholder="https://www.example.com/" autocomplete="off" /> -->
       <label for="file upload">Upload Cover Image: </label>
-      <img id="preview" src="" alt="Image preview" style="display: none;">
+      <img id="preview" src="" alt="Image preview">
       <input id="file-input" class="custom-file-upload" type="file" name="file" accept="image/png, image/jpeg"  required/>
       <button type="submit">Upload</button>
     </form>
@@ -70,11 +70,11 @@ content %} {% if session["user_id"] and show_modal %}
           <label for="title">Title</label>
           <input name="title" value="{{project.title}}" autocomplete="off" />
           
-          <label for="cover_image_preview">Cover Image</label>
-          <img name="cover_image_preview" src="{{project.cover_image_url}}"/>
+          <label for="current-image">Cover Image</label>
+          <img class="current-image" name="current-image" src="{{project.cover_image_url}}"/>
           
           <label for="modify_file">Replace Cover Image</label>
-            <img id="preview" src="" alt="Image preview" style="display: none;">
+            <img id="preview" src="" alt="Image preview">
               <input id="file-input" class="custom-file-upload" type="file" name="modify_file" accept="image/png, image/jpeg"  required/>
           
           <button type="submit">Update</button>

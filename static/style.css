@@ -697,3 +697,12 @@ input[type="file"] {
 #backToTop:hover {
   background: #555;
 }
+
+#preview {
+  display: none;
+  border-radius: 0.75rem;
+}
+
+.current-image {
+  border-radius: 0.75rem;
+}
