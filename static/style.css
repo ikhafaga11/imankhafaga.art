@@ -497,9 +497,12 @@ input[type="file"] {
 
 .modal-card {
   width: min(90%, 420px);
+  max-height: 95dvh;
+  overflow: hidden;
   background-color: var(--background-color-white);
   padding: 2rem;
   border-radius: 1rem;
+  overflow-y: auto;
 }
 
 .x-icon {
