@@ -85,9 +85,11 @@ def project_detail(project_id):
 
     if request.method == "POST" and editing_id:
         caption = request.form["caption"]
-        image_url = request.form["image_url"]
+        file = request.files["modify_file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{project.title}")
+        # image_url = request.form["image_url"]
         model = ProjectContent(
-            project_id=project.id, caption=caption, image_url=image_url, id=editing_id
+            project_id=project.id, caption=caption, image_url=url, id=editing_id
         )
         content_repo.update_content(model)
         flash("Project content successfully updated.", "success")
@@ -96,10 +98,12 @@ def project_detail(project_id):
     if request.method == "POST":
         # get form values
         caption = request.form["caption"]
-        image_url = request.form["image_url"]
+        # image_url = request.form["image_url"]
+        file = request.files["file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{project.title}")
         # instantial content model
         model = ProjectContent(
-            project_id=project.id, caption=caption, image_url=image_url
+            project_id=project.id, caption=caption, image_url=url
         )
         # insert content
         new_content = content_repo.post_content(model)
