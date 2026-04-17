@@ -72,7 +72,7 @@ block content %} {% if session['user_id'] and show_modal%}
           <img class="current-image" src="{{content.image_url}}"/>
           <label for="modify_file">Replace Image</label>
           <img id="preview" src="" alt="Image preview">
-          <input id="file-input" class="custom-file-upload" type="file" name="modify_file" accept="image/png, image/jpeg"/>
+          <input id="file-input" class="custom-file-upload" type="file" name="modify_file" accept="image/png, image/jpeg, image/gif"/>
           <button type="submit">Update</button>
         </form>
       </div>
