@@ -10,6 +10,7 @@ from lib.auth_service import authenticate, InvalidCredentialsError
 from flask_mail import Mail, Message
 import os
 from dotenv import load_dotenv
+from lib.cloudinary_service import CloudinaryService
 
 load_dotenv()
 app = Flask(__name__)
@@ -41,8 +42,10 @@ def projects():
 
     if editing_id and request.method == "POST":
         title = request.form["title"]
-        cover_image_url = request.form["cover_image_url"]
-        model = Project(id=editing_id, cover_image_url=cover_image_url, title=title)
+        # cover_image_url = request.form["cover_image_url"]
+        file = request.files["modify_file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{title}/Cover Image")
+        model = Project(id=editing_id, cover_image_url=url, title=title)
         repo.update_project(model)
         flash("Project successfully updated.", "success")
         return redirect(url_for("projects"))
@@ -50,9 +53,10 @@ def projects():
     if request.method == "POST":
         # get form values
         title = request.form["title"]
-        cover_image_url = request.form["cover_image_url"]
+        file = request.files["file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{title}/Cover Image")
         # instantiate model
-        model = Project(title=title, cover_image_url=cover_image_url)
+        model = Project(title=title, cover_image_url=url)
         # insert new project
         repo.post_project(model)
         # redirect to project to prevent for resubmision
@@ -81,9 +85,11 @@ def project_detail(project_id):
 
     if request.method == "POST" and editing_id:
         caption = request.form["caption"]
-        image_url = request.form["image_url"]
+        file = request.files["modify_file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{project.title}")
+        # image_url = request.form["image_url"]
         model = ProjectContent(
-            project_id=project.id, caption=caption, image_url=image_url, id=editing_id
+            project_id=project.id, caption=caption, image_url=url, id=editing_id
         )
         content_repo.update_content(model)
         flash("Project content successfully updated.", "success")
@@ -92,10 +98,12 @@ def project_detail(project_id):
     if request.method == "POST":
         # get form values
         caption = request.form["caption"]
-        image_url = request.form["image_url"]
+        # image_url = request.form["image_url"]
+        file = request.files["file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{project.title}")
         # instantial content model
         model = ProjectContent(
-            project_id=project.id, caption=caption, image_url=image_url
+            project_id=project.id, caption=caption, image_url=url
         )
         # insert content
         new_content = content_repo.post_content(model)
@@ -142,8 +150,10 @@ def sketchbook():
     repo = SketchbookRepository(connection)
     show_new = request.args.get("new") == "true"
     if request.method == "POST":
-        image_url = request.form["image_url"]
-        repo.add_sketch(image_url=image_url)
+        # image_url = request.form["image_url"]
+        file = request.files["file"]
+        url = CloudinaryService.upload(file, "SketchBook")
+        repo.add_sketch(image_url=url)
         flash("New sketch added.", "success")
         return redirect(url_for("sketchbook"))
 

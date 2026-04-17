@@ -11,3 +11,15 @@ window.scrollTo({
 })
 })
 
+const input = document.getElementById("file-input");
+const preview = document.getElementById("preview")
+
+input.addEventListener("change", () => {
+    const file = input.files[0];
+
+    if(file) {
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.style.display = "block";
+    }
+})
