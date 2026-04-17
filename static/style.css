@@ -438,7 +438,7 @@ nav ul li a {
 .auth-form input,
 .projects-form input,
 .sketches-form input {
-  min-width: 300px;
+  max-width: 300px;
   border-radius: 0.75rem;
   border: solid 0.1rem var(--text-color-black);
   padding: 1rem;
