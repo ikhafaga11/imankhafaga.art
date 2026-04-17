@@ -11,11 +11,13 @@ block content %} {% if session['user_id'] and show_modal%}
       <span class="text">Upload Project</span>
       <span class="emoji">⬆️</span>
     </h2>
-    <form method="post" autocomplete="off">
+    <form method="post" autocomplete="off" enctype="multipart/form-data">
       <label for="caption">Caption</label>
       <input name="caption" placeholder="Add a caption…" autocomplete="off" />
-      <label for="image url">Image</label>
-      <input name="image_url" placeholder="https://www.example.com/" autocomplete="off" />
+      <!-- <label for="image url">Image</label>
+      <input name="image_url" placeholder="https://www.example.com/" autocomplete="off" /> -->
+      <labe for="file">Upload Image</labe>
+      <input type="file" name="file" accept="image/png, image/jpeg" required>
       <button type="submit">Upload</button>
     </form>
   </div>
@@ -60,11 +62,15 @@ block content %} {% if session['user_id'] and show_modal%}
           <span class="text">Edit Content</span>
           <span class="emoji">✏️</span>
         </h2>
-        <form method="POST" autocomplete="off">
+        <form method="POST" autocomplete="off" enctype="multipart/form-data">
           <label for="caption">Caption</label>
           <input name="caption" autocomplete="off" value="{{content.caption}}" />
-          <label for="image url">Image</label>
-          <input name="image_url" autocomplete="off" value="{{content.image_url}}" />
+          <!-- <label for="image url">Image</label>
+          <input name="image_url" autocomplete="off" value="{{content.image_url}}" /> -->
+          <label for="image">Image</label>
+          <img src="{{content.image_url}}"/>
+          <label for="modify_file">Replace Image</label>
+          <input type="file" name="modify_file" accept="image/png, image/jpeg"/>
           <button type="submit">Update</button>
         </form>
       </div>
