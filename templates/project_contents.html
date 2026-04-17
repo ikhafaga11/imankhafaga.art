@@ -17,7 +17,8 @@ block content %} {% if session['user_id'] and show_modal%}
       <!-- <label for="image url">Image</label>
       <input name="image_url" placeholder="https://www.example.com/" autocomplete="off" /> -->
       <labe for="file">Upload Image</labe>
-      <input type="file" name="file" accept="image/png, image/jpeg" required>
+      <img id="preview" src="" alt="Image preview" style="display: none;">
+      <input id="file-input" class="custom-file-upload" type="file" name="file" accept="image/png, image/jpeg" required>
       <button type="submit">Upload</button>
     </form>
   </div>
@@ -70,7 +71,8 @@ block content %} {% if session['user_id'] and show_modal%}
           <label for="image">Image</label>
           <img src="{{content.image_url}}"/>
           <label for="modify_file">Replace Image</label>
-          <input type="file" name="modify_file" accept="image/png, image/jpeg"/>
+          <img id="preview" src="" alt="Image preview" style="display: none;">
+          <input id="file-input" class="custom-file-upload" type="file" name="modify_file" accept="image/png, image/jpeg"/>
           <button type="submit">Update</button>
         </form>
       </div>
