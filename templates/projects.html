@@ -13,11 +13,11 @@ content %} {% if session["user_id"] and show_modal %}
     </h2>
     <form method="post" autocomplete="off" enctype="multipart/form-data">
       <label for="title">Title:</label>
-      <input name="title" placeholder="Project 1" autocomplete="off" />
+      <input name="title" placeholder="Project 1" autocomplete="off" required />
       <label for="cover image">Cover Image:</label>
       <input name="cover_image_url" placeholder="https://www.example.com/" autocomplete="off" />
       <label for="file upload">Upload Cover Image: </label>
-      <input type="file" name="file" accept="image/png, image/jpeg" />
+      <input type="file" name="file" accept="image/png, image/jpeg"  required/>
       <button type="submit">Upload</button>
     </form>
   </div>
