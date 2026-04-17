@@ -42,8 +42,10 @@ def projects():
 
     if editing_id and request.method == "POST":
         title = request.form["title"]
-        cover_image_url = request.form["cover_image_url"]
-        model = Project(id=editing_id, cover_image_url=cover_image_url, title=title)
+        # cover_image_url = request.form["cover_image_url"]
+        file = request.files["modify_file"]
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{title}/Cover Image")
+        model = Project(id=editing_id, cover_image_url=url, title=title)
         repo.update_project(model)
         flash("Project successfully updated.", "success")
         return redirect(url_for("projects"))
@@ -52,7 +54,7 @@ def projects():
         # get form values
         title = request.form["title"]
         file = request.files["file"]
-        url = CloudinaryService.upload(file, f"Projects/{title}/Cover Image")
+        url = CloudinaryService.upload(file, asset_folder=f"Projects/{title}/Cover Image")
         # instantiate model
         model = Project(title=title, cover_image_url=url)
         # insert new project

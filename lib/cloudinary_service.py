@@ -17,6 +17,7 @@ class CloudinaryService:
    
     @staticmethod
     def upload(file: FileStorage, asset_folder: str) -> str:
+        print(file)
         result = cloudinary.uploader.upload(
             file, 
             asset_folder=asset_folder)

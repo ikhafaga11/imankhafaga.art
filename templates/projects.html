@@ -65,7 +65,7 @@ content %} {% if session["user_id"] and show_modal %}
           <span class="text">Edit Project</span>
           <span class="emoji">✏️</span>
         </h2>
-        <form method="post" autocomplete="off">
+        <form method="post" autocomplete="off" enctype="multipart/form-data">
           <label for="title">Title</label>
           <input name="title" value="{{project.title}}" autocomplete="off" />
           
@@ -73,7 +73,7 @@ content %} {% if session["user_id"] and show_modal %}
           <img name="cover_image_preview" src="{{project.cover_image_url}}"/>
           
           <label for="modify_file">Replace Cover Image</label>
-          <input type="file" name="modify_file" value="{{project.cover_image_url}}" autocomplete="off" />
+              <input type="file" name="modify_file" accept="image/png, image/jpeg"  required/>
           
           <button type="submit">Update</button>
         </form>
