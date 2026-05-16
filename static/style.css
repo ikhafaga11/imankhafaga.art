@@ -78,7 +78,7 @@ main {
 
 nav {
   display: flex;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 nav h1 {
@@ -157,7 +157,7 @@ nav ul li a {
   height: 100%;
   border: 0;
   border-radius: 0.5rem;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .projects__container {
