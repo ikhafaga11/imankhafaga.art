@@ -42,7 +42,7 @@
         </li>
         <!-- <li>
           <a
-            href="{{url_for('contact')}}"
+            href="#"
             class="{% if active_page == 'contact' %}active{% endif %}"
             >Contact</a
           >
@@ -75,13 +75,15 @@
             >Links</a
           >
         </li>
+
         <!-- <li>
           <a
-            href="{{url_for('contact')}}"
+            href="#"
             class="{% if active_page == 'contact' %}active{% endif %}"
             >Contact</a
           >
         </li> -->
+
         {% if session['user_id'] %}
         <li><a href="{{url_for('logout')}}">Logout</a></li>
         {% endif %}
