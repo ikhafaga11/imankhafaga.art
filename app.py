@@ -7,7 +7,7 @@ from lib.auth_repository import AuthRepository
 from lib.project_content import ProjectContent
 from lib.project import Project
 from lib.auth_service import authenticate, InvalidCredentialsError
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 import os
 from dotenv import load_dotenv
 from lib.cloudinary_service import CloudinaryService
@@ -15,13 +15,13 @@ from lib.cloudinary_service import CloudinaryService
 load_dotenv()
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"]=True
-app.config["MAIL_USE_SSL"]=False
-app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = ("Iman Artist Website", os.getenv("MAIL_DEFAULT_SENDER"))
+# app.config["MAIL_SERVER"] = "smtp.gmail.com"
+# app.config["MAIL_PORT"] = 587
+# app.config["MAIL_USE_TLS"]=True
+# app.config["MAIL_USE_SSL"]=False
+# app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
+# app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
+# app.config["MAIL_DEFAULT_SENDER"] = ("Iman Artist Website", os.getenv("MAIL_DEFAULT_SENDER"))
 
 mail = Mail(app)
 
@@ -178,40 +178,40 @@ def links():
     return render_template("links.html", active_page="links")
 
 
-@app.route("/contact/success", methods=["GET"])
-def submitted_form():
-    return render_template("submitted_form.html")
+# @app.route("/contact/success", methods=["GET"])
+# def submitted_form():
+#     return render_template("submitted_form.html")
 
 
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        message = request.form["message"]
-        body = f"""
-        New message from your portfolio contact form
+# @app.route("/contact", methods=["GET", "POST"])
+# def contact():
+#     if request.method == "POST":
+#         name = request.form["name"]
+#         email = request.form["email"]
+#         message = request.form["message"]
+#         body = f"""
+#         New message from your portfolio contact form
         
-        Name:
-        {name}
+#         Name:
+#         {name}
 
-        Email:
-        {email}
+#         Email:
+#         {email}
 
-        Message:
-        {message}
-        """
-        msg = Message(
-            subject=f"[Portfolio Contact] {name}",
-            reply_to=email,
-            sender=os.getenv("MAIL_USERNAME"),
-            recipients=[os.getenv("MAIL_USERNAME")],
-            body=body,
-        )
-        mail.send(msg)
-        return redirect(url_for("submitted_form"))
+#         Message:
+#         {message}
+#         """
+#         msg = Message(
+#             subject=f"[Portfolio Contact] {name}",
+#             reply_to=email,
+#             sender=os.getenv("MAIL_USERNAME"),
+#             recipients=[os.getenv("MAIL_USERNAME")],
+#             body=body,
+#         )
+#         mail.send(msg)
+#         return redirect(url_for("submitted_form"))
 
-    return render_template("contact.html", active_page="contact")
+#     return render_template("contact.html", active_page="contact")
 
 
 @app.route("/auth/login", methods=["GET", "POST"])
