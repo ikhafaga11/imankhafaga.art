@@ -23,7 +23,7 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 # app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
 # app.config["MAIL_DEFAULT_SENDER"] = ("Iman Artist Website", os.getenv("MAIL_DEFAULT_SENDER"))
 
-mail = Mail(app)
+# mail = Mail(app)
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
