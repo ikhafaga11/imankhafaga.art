@@ -40,13 +40,13 @@
             >Links</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a
             href="{{url_for('contact')}}"
             class="{% if active_page == 'contact' %}active{% endif %}"
             >Contact</a
           >
-        </li>
+        </li> -->
       </ul>
     </nav>
 
@@ -75,13 +75,13 @@
             >Links</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a
             href="{{url_for('contact')}}"
             class="{% if active_page == 'contact' %}active{% endif %}"
             >Contact</a
           >
-        </li>
+        </li> -->
         {% if session['user_id'] %}
         <li><a href="{{url_for('logout')}}">Logout</a></li>
         {% endif %}
